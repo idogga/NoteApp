@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 
 namespace NoteAppModel
 {
@@ -16,7 +17,9 @@ namespace NoteAppModel
         /// <param name="str">строка для логгирования</param>
         public void Write(string str)
         {
-            System.Diagnostics.Debug.WriteLine(GetLogString(str));
+            var log = GetLogString(str);
+            System.Diagnostics.Debug.WriteLine(log);
+            File.AppendAllText(AppDomain.CurrentDomain.BaseDirectory + "Log-" + DateTime.Now.ToShortDateString() + ".log", log);
         }
 
         /// <summary>
@@ -27,7 +30,9 @@ namespace NoteAppModel
         {
             if (obj != null)
             {
-                System.Diagnostics.Debug.WriteLine(GetLogString(Newtonsoft.Json.JsonConvert.SerializeObject(obj)));
+                var log = GetLogString(Newtonsoft.Json.JsonConvert.SerializeObject(obj));
+                System.Diagnostics.Debug.WriteLine(log);
+                File.AppendAllText(AppDomain.CurrentDomain.BaseDirectory + "Log-" + DateTime.Now.ToShortDateString() + ".log", log);
             }
         }
         #endregion
