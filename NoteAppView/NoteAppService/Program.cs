@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NoteAppModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.ServiceProcess;
@@ -14,12 +15,15 @@ namespace NoteAppService
         /// </summary>
         static void Main()
         {
+            Logger logger = new Logger();
+            logger.Write("Служба запущена");
             ServiceBase[] ServicesToRun;
             ServicesToRun = new ServiceBase[]
             {
-                new Service1()
+                new NoteAppService()
             };
             ServiceBase.Run(ServicesToRun);
+            new Server(logger, 80);
         }
     }
 }

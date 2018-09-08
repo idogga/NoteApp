@@ -1,6 +1,6 @@
 ﻿namespace NoteAppService
 {
-    partial class Service1
+    partial class NoteAppService
     {
         /// <summary> 
         /// Required designer variable.
