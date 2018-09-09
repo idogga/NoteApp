@@ -40,15 +40,15 @@ namespace NoteAppService
             var requestHelper = new RequestHelper(logger, reqs[0]);
             if(requestHelper.IsContains())
             {
-                request = requestHelper.Execute(reqs[1]);
-                buffer = Encoding.ASCII.GetBytes(request);
+                request = requestHelper.Execute(Encoding.UTF8.GetString(Convert.FromBase64String(reqs[1])));
+                buffer = Encoding.ASCII.GetBytes(Convert.ToBase64String(Encoding.UTF8.GetBytes(request)));
             }
             else
             {
                 SendError(client, 400);
                 return;
             }
-            string headers = "HTTP/1.1 200 OK\nContent-Type: text/json\nContent-Length: " + buffer.Length + /*"\nConnection: Keep-Alive" + */"\n\n";
+            string headers = "HTTP/1.1 200 OK\r\nContent-Type: text/json\r\nContent-Length: " + buffer.Length + "\r\nConnection: Keep-Alive" + "\r\n\r\n";
             logger.Write("Ответ на запрос : " + headers + request);
             byte[] headersBuffer = Encoding.ASCII.GetBytes(headers);
             client.GetStream().Write(headersBuffer, 0, headersBuffer.Length);

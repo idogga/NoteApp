@@ -19,38 +19,40 @@ namespace NoteAppModelTest
 
         public bool IsContain(string login)
         {
-            var bodyByte = Encoding.UTF8.GetBytes("USERCONTAINS:" + login + "$end");
-            var request = (HttpWebRequest)WebRequest.Create("http://localhost:1333");
+            try
+            {
+                var answer = MakeRequest("USERCONTAINS", login);
+                return bool.Parse(answer);
+            }
+            catch (Exception ex)
+            {
+                _logger.Write(ex);
+                return true;
+            }
+        }
+
+        private string MakeRequest(string name, string body)
+        {
+            var bodyByte = Encoding.UTF8.GetBytes(name + ":" + Convert.ToBase64String(Encoding.UTF8.GetBytes(body)) + "$end");
+            var request = WebRequest.Create("http://localhost:1333");
             request.Method = "POST";
             request.Credentials = CredentialCache.DefaultCredentials;
             request.ContentType = "text/json";
             request.ContentLength = bodyByte.Length;
-            request.KeepAlive = true;
-            request.Timeout = 600000;
-            request.ServicePoint.Expect100Continue = false;
-            request.ServicePoint.MaxIdleTime = 0;
-            request.ProtocolVersion = HttpVersion.Version10;
+            request.Timeout = 60000;
+            _logger.Write("Запрос отправлен : " + body);
             using (var requestStream = request.GetRequestStream())
             {
                 requestStream.Write(bodyByte, 0, bodyByte.Length);
             }
-            try
+            using (var response = request.GetResponse())
             {
-                using (HttpWebResponse response = (HttpWebResponse)request.GetResponse())
+                using (StreamReader reader = new StreamReader(response.GetResponseStream()))
                 {
-                    _logger.Write("response");
-                    using (StreamReader reader = new StreamReader(response.GetResponseStream()))
-                    {
-                        var responseString = reader.ReadToEnd();
-                        _logger.Write("Ответ получен : " + responseString);
-                        return bool.Parse(responseString);
-                    }
+                    var responseString = Encoding.UTF8.GetString(Convert.FromBase64String(reader.ReadToEnd()));
+                    _logger.Write("Ответ получен : " + responseString);
+                    return responseString;
                 }
-            }
-            catch(Exception ex)
-            {
-                _logger.Write(ex);
-                return true;
             }
         }
     }
