@@ -24,17 +24,13 @@ namespace NoteAppService
             }
             request = request.Replace("$end", "");
             Match reqMatch = Regex.Match(request, @"^\w+\s+([^\s\?]+)[^\s]*\s+HTTP/.*|");
-
-            // Если запрос не удался
             if (reqMatch == Match.Empty)
             {
-                // Передаем клиенту ошибку 400 - неверный запрос
                 logger.Write("Ошибка в запросе");
                 SendError(client, 400);
                 return;
             }
-            logger.Write("Запрос : " + request);
-            
+            logger.Write("Запрос : " + request);            
             var commands = request.Split(new string[] { "\r\n\r\n" }, StringSplitOptions.RemoveEmptyEntries);
             var reqs = commands[1].Split(new char[] { ':' });
             var requestHelper = new RequestHelper(logger, reqs[0]);

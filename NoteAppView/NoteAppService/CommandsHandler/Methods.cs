@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using NoteAppModel;
 using NoteAppModel.DataBase;
+using System.Collections.Generic;
 
 namespace NoteAppService
 {
@@ -26,28 +22,56 @@ namespace NoteAppService
             _commands.Add("SAVENOTE", SaveNote);
         }
 
+        /// <summary>
+        /// Словарь со всеми командами
+        /// </summary>
+        /// <returns></returns>
         public Dictionary<string, CommandDelegate> GetAvailableCommands()
         {
             return _commands;
         }
 
+        #region Вспомогательные методы
+        /// <summary>
+        /// Сериализация объекта
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns></returns>
         private string Serialize(object obj)
         {
             return Newtonsoft.Json.JsonConvert.SerializeObject(obj);
         }
+        #endregion
 
+        #region Функции-команды
+        
+        /// <summary>
+        /// Автоирзация пользователя
+        /// </summary>
+        /// <param name="param">логин,пароль</param>
+        /// <returns>пользователь</returns>
         private string Authorize(string param)
         {
             var user = new NoteAppModel.DataBase.NoteRealm();
             return Serialize(user);
         }
-
+        
+        /// <summary>
+        /// Есть ли пользователь с таким логином в БД
+        /// </summary>
+        /// <param name="param"></param>
+        /// <returns></returns>
         private string UserContains(string param)
         {
             var result = _dbHelper.UserContains(param);
             return Serialize(result);
         }
 
+        /// <summary>
+        /// Сохранение данных пользователя
+        /// </summary>
+        /// <param name="param"></param>
+        /// <returns></returns>
         private string SaveUser(string param)
         {
             var result = false;
@@ -64,7 +88,7 @@ namespace NoteAppService
         }
 
         /// <summary>
-        /// Авторизация пользователя
+        /// поиск пользователя
         /// </summary>
         /// <param name="param"></param>
         /// <returns></returns>
@@ -122,5 +146,6 @@ namespace NoteAppService
             }
             return Serialize(result);
         }
-        }
+        #endregion
     }
+}

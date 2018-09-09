@@ -38,12 +38,21 @@ namespace NoteAppModel.DataBase
         [JsonProperty("tLink")]
         public IList<int> TagsLinks { get; }
 
+        /// <summary>
+        /// Пользовательский ключ
+        /// </summary>
         [JsonProperty("User")]
         public int UserId { get; set; } = 0;
 
+        /// <summary>
+        /// Дата создания
+        /// </summary>
         [JsonProperty("creteAt")]
         public DateTimeOffset CreateDate { get; set; } = DateTimeOffset.Now;
 
+        /// <summary>
+        /// Дата изменения
+        /// </summary>
         [JsonProperty("updateAt")]
         public DateTimeOffset UpdateDate { get; set; } = DateTimeOffset.Now;
 

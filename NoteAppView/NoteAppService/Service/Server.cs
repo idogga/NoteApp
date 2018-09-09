@@ -31,6 +31,11 @@ namespace NoteAppService
                 });
             }
         }
+
+        /// <summary>
+        /// Клиентский обработчик
+        /// </summary>
+        /// <param name="stateInfo"></param>
         private void ClientThread(Object stateInfo)
         {
             new Client((TcpClient)stateInfo, _logger);

@@ -47,11 +47,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Client.cs" />
-    <Compile Include="Methods.cs" />
-    <Compile Include="Request.cs" />
-    <Compile Include="RequestHelper.cs" />
-    <Compile Include="Server.cs" />
+    <Compile Include="Service\Client.cs" />
+    <Compile Include="CommandsHandler\Methods.cs" />
+    <Compile Include="CommandsHandler\RequestHelper.cs" />
+    <Compile Include="Service\Server.cs" />
     <Compile Include="NoteAppService.cs">
       <SubType>Component</SubType>
     </Compile>

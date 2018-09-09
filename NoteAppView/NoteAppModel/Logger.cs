@@ -42,6 +42,10 @@ namespace NoteAppModel
             }
         }
 
+        /// <summary>
+        /// Запись ошибки
+        /// </summary>
+        /// <param name="ex"></param>
         public void Write(Exception ex)
         {
             lock (_obj)
