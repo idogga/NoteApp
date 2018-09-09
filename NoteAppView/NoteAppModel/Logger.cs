@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Text;
 
 namespace NoteAppModel
 {
@@ -19,7 +20,7 @@ namespace NoteAppModel
         {
             var log = GetLogString(str);
             System.Diagnostics.Debug.WriteLine(log);
-            File.AppendAllText(AppDomain.CurrentDomain.BaseDirectory + "Log-" + DateTime.Now.ToShortDateString() + ".log", log);
+            File.AppendAllText(AppDomain.CurrentDomain.BaseDirectory + "Log-" + DateTime.Now.ToShortDateString() + ".log", log + Environment.NewLine);
         }
 
         /// <summary>
@@ -32,7 +33,7 @@ namespace NoteAppModel
             {
                 var log = GetLogString(Newtonsoft.Json.JsonConvert.SerializeObject(obj));
                 System.Diagnostics.Debug.WriteLine(log);
-                File.AppendAllText(AppDomain.CurrentDomain.BaseDirectory + "Log-" + DateTime.Now.ToShortDateString() + ".log", log);
+                File.AppendAllText(AppDomain.CurrentDomain.BaseDirectory + "Log-" + DateTime.Now.ToShortDateString() + ".log", log + Environment.NewLine);
             }
         }
         #endregion
