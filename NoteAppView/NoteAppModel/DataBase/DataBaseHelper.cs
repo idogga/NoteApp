@@ -22,7 +22,7 @@ namespace NoteAppModel.DataBase
                 Directory.CreateDirectory(path);
             }
 
-            string file = $"{path}\\default.realm";
+            string file = $"{path}\\noteBase.realm";
 
             RealmConfiguration config = new RealmConfiguration(file)
             {

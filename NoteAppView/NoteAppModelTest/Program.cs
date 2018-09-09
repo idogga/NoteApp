@@ -13,25 +13,24 @@ namespace NoteAppModelTest
         static void Main(string[] args)
         {
             var logger = new Logger();
-            var _dbHelper = new DataBaseHelper(logger);
             var _httpHelper = new HttpHelper(logger);
             UserRealm user;
             if(NeedRegistration())
             {
-                user = Registration(_dbHelper, _httpHelper);
+                user = Registration(_httpHelper);
             }
             else
             {
-                user = Auth(_dbHelper);
+                user = Auth(_httpHelper);
             }
             logger.Write("Авторизация пользователя " + user.Login);
-            ShowList(user, _dbHelper);
-            AddNotes(user, _dbHelper);
-            ShowList(user, _dbHelper);
+            ShowList(user, _httpHelper);
+            AddNotes(user, _httpHelper);
+            ShowList(user, _httpHelper);
             Console.ReadKey();
         }
 
-        private static void AddNotes(UserRealm user, DataBaseHelper dbHelper)
+        private static void AddNotes(UserRealm user, HttpHelper httpHelper)
         {
             var newNote = new NoteRealm();
             newNote.UserId = user.UserKey;
@@ -39,20 +38,24 @@ namespace NoteAppModelTest
             newNote.Title = Console.ReadLine();
             Console.WriteLine("Введите саму запись : ");
             newNote.ContentText = Console.ReadLine();
-            dbHelper.SaveNote(newNote);
+            if(!httpHelper.SaveNote(newNote))
+            {
+                Console.WriteLine("Не удалось сохранить запись. Попробуйте снова!");
+                AddNotes(user, httpHelper);
+            }
             Console.WriteLine("Хотите добавить еще запись ? y/n");
             var result = Console.ReadKey();
             if (result.KeyChar == 'y')
             {
                 Console.WriteLine();
-                AddNotes(user, dbHelper);
+                AddNotes(user, httpHelper);
             }
         }
 
-        private static void ShowList(UserRealm user, DataBaseHelper dbHelper)
+        private static void ShowList(UserRealm user, HttpHelper httpHelper)
         {
             Console.WriteLine("Записи пользователя в БД : ");
-            var listnotes = dbHelper.GetAllNotes(user.UserKey);
+            var listnotes = httpHelper.GetAllNotes(user.UserKey);
             if (listnotes != null || listnotes.Count == 0)
             {
                 foreach (var note in listnotes)
@@ -66,7 +69,7 @@ namespace NoteAppModelTest
             }
         }
 
-        private static UserRealm Registration(DataBaseHelper _dbHelper, HttpHelper _httpHelper)
+        private static UserRealm Registration(HttpHelper _httpHelper)
         {
             var result = new UserRealm();
             Console.WriteLine("Введите логин : ");
@@ -74,11 +77,15 @@ namespace NoteAppModelTest
             if (_httpHelper.IsContain(result.Login))
             {
                 Console.WriteLine("Пользователь с таким логином существует. Ппопробуйте что-то новое." + Environment.NewLine);
-                return Registration(_dbHelper, _httpHelper);
+                return Registration(_httpHelper);
             }
             Console.WriteLine("Введите пароль : ");
-            result.Password = Encoding.UTF8.GetString((new SHA1CryptoServiceProvider()).ComputeHash(Encoding.UTF8.GetBytes(Console.ReadLine()))); 
-            _dbHelper.SaveUser(result);
+            result.Password = Encoding.UTF8.GetString((new SHA1CryptoServiceProvider()).ComputeHash(Encoding.UTF8.GetBytes(Console.ReadLine())));
+            if(!_httpHelper.SaveUser(result))
+            {
+                Console.WriteLine("При сохранении произошла ошибка! Попробуйте еще раз!");
+                Registration(_httpHelper);
+            }
             return result; 
         }
 
@@ -94,17 +101,17 @@ namespace NoteAppModelTest
             return NeedRegistration();
         }
 
-        private static UserRealm Auth(DataBaseHelper _dbHelper)
+        private static UserRealm Auth(HttpHelper _httpHelper)
         {
             Console.WriteLine("Введите логин и через пробел пароль : ");
             var str = Console.ReadLine();
             string[] loginData = str.Split(new char[] { ' ' });
             SHA1 sha = new SHA1CryptoServiceProvider();
-            var user = _dbHelper.GetUser(loginData[0], Encoding.UTF8.GetString((new SHA1CryptoServiceProvider()).ComputeHash(Encoding.UTF8.GetBytes(loginData[1]))));
+            var user = _httpHelper.GetUser(loginData[0], Encoding.UTF8.GetString((new SHA1CryptoServiceProvider()).ComputeHash(Encoding.UTF8.GetBytes(loginData[1]))));
             if (user == null)
             {
                 Console.WriteLine("Сбой аутенфикации. Попробуйте снова" + Environment.NewLine);
-                return Auth(_dbHelper);
+                return Auth(_httpHelper);
             }
             else
             {
