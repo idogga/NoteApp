@@ -1,6 +1,7 @@
 ﻿using NoteAppModel;
 using NoteAppModel.DataBase;
 using System;
+using System.Net.Http;
 using System.Security.Cryptography;
 using System.Text;
 
@@ -8,19 +9,22 @@ namespace NoteAppModelTest
 {
     public class Program
     {
+        
         static void Main(string[] args)
         {
             var logger = new Logger();
             var _dbHelper = new DataBaseHelper(logger);
+            var _httpHelper = new HttpHelper(logger);
             UserRealm user;
             if(NeedRegistration())
             {
-                user = Registration(_dbHelper);
+                user = Registration(_dbHelper, _httpHelper);
             }
             else
             {
                 user = Auth(_dbHelper);
             }
+            logger.Write("Авторизация пользователя " + user.Login);
             ShowList(user, _dbHelper);
             AddNotes(user, _dbHelper);
             ShowList(user, _dbHelper);
@@ -62,15 +66,15 @@ namespace NoteAppModelTest
             }
         }
 
-        private static UserRealm Registration(DataBaseHelper _dbHelper)
+        private static UserRealm Registration(DataBaseHelper _dbHelper, HttpHelper _httpHelper)
         {
             var result = new UserRealm();
             Console.WriteLine("Введите логин : ");
             result.Login = Console.ReadLine();
-            if (_dbHelper.UserContains(result.Login))
+            if (_httpHelper.IsContain(result.Login))
             {
                 Console.WriteLine("Пользователь с таким логином существует. Ппопробуйте что-то новое." + Environment.NewLine);
-                return Registration(_dbHelper);
+                return Registration(_dbHelper, _httpHelper);
             }
             Console.WriteLine("Введите пароль : ");
             result.Password = Encoding.UTF8.GetString((new SHA1CryptoServiceProvider()).ComputeHash(Encoding.UTF8.GetBytes(Console.ReadLine()))); 
@@ -107,5 +111,7 @@ namespace NoteAppModelTest
                 return user;
             }
         }
+
+
     }
 }

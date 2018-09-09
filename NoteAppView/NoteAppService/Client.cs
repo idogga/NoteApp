@@ -1,4 +1,5 @@
 ﻿using NoteAppModel;
+using System;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
@@ -11,16 +12,17 @@ namespace NoteAppService
         public Client(TcpClient client, Logger logger)
         {
             string request = "";
-            byte[] buffer = new byte[1024];
+            byte[] buffer = new byte[2048];
             int count;
             while ((count = client.GetStream().Read(buffer, 0, buffer.Length)) > 0)
             {
                 request += Encoding.ASCII.GetString(buffer, 0, count);
-                if (request.IndexOf("\r\n\r\n") >= 0 || request.Length > 4096)
+                if (request.IndexOf("$end") >= 0 || request.Length > 4096)
                 {
                     break;
                 }
             }
+            request = request.Replace("$end", "");
             Match reqMatch = Regex.Match(request, @"^\w+\s+([^\s\?]+)[^\s]*\s+HTTP/.*|");
 
             // Если запрос не удался
@@ -32,11 +34,22 @@ namespace NoteAppService
                 return;
             }
             logger.Write("Запрос : " + request);
-
-            string RequestUri = reqMatch.Groups[1].Value;
-            string html = "<html><body><h1>It works!</h1></body></html>";
-            buffer = Encoding.ASCII.GetBytes(html);
-            string headers = "HTTP/1.1 200 OK\nContent-Type: " + "text/html" + "\nContent-Length: " + buffer.Length + "\n\n";
+            
+            var commands = request.Split(new string[] { "\r\n\r\n" }, StringSplitOptions.RemoveEmptyEntries);
+            var reqs = commands[1].Split(new char[] { ':' });
+            var requestHelper = new RequestHelper(logger, reqs[0]);
+            if(requestHelper.IsContains())
+            {
+                request = requestHelper.Execute(reqs[1]);
+                buffer = Encoding.ASCII.GetBytes(request);
+            }
+            else
+            {
+                SendError(client, 400);
+                return;
+            }
+            string headers = "HTTP/1.1 200 OK\nContent-Type: text/json\nContent-Length: " + buffer.Length + /*"\nConnection: Keep-Alive" + */"\n\n";
+            logger.Write("Ответ на запрос : " + headers + request);
             byte[] headersBuffer = Encoding.ASCII.GetBytes(headers);
             client.GetStream().Write(headersBuffer, 0, headersBuffer.Length);
             client.GetStream().Write(buffer, 0, buffer.Length);
@@ -52,7 +65,7 @@ namespace NoteAppService
         {
             string codeStr = code.ToString() + " " + ((HttpStatusCode)code).ToString();
             string html = "<html><body><h1>" + codeStr + "</h1></body></html>";
-            string str = "HTTP/1.1 " + codeStr + "\nContent-type: text/html\nContent-Length:" + html.Length.ToString() + "\n\n" + html;
+            string str = "HTTP/1.1 " + codeStr + "\r\nContent-type: text/html\r\nContent-Length:" + html.Length.ToString() + "\r\n\r\n" + html;
             byte[] buffer = Encoding.ASCII.GetBytes(str);
             client.GetStream().Write(buffer, 0, buffer.Length);
             client.Close();

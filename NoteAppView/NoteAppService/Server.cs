@@ -21,9 +21,8 @@ namespace NoteAppService
             while (true)
             {
                 var token = new CancellationToken();
-                Task.Factory.StartNew(async x =>
+                Task.Factory.StartNew(x =>
                 {
-                    _logger.Write("Получен запрос");
                     var client = _listener.AcceptTcpClient();
                     var client1 = new Client(client, logger);
                 }, token);
