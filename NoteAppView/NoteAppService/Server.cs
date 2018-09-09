@@ -18,15 +18,22 @@ namespace NoteAppService
             _listener = new TcpListener(IPAddress.Any, port);
             _listener.Start();
             _logger.Write("Сервер запущен");
+            int MaxThreadsCount = Environment.ProcessorCount * 4;
+
+            ThreadPool.SetMaxThreads(MaxThreadsCount, MaxThreadsCount);
+            ThreadPool.SetMinThreads(2, 2);
             while (true)
             {
-                var token = new CancellationToken();
-                Task.Factory.StartNew(x =>
+                ThreadPool.QueueUserWorkItem(new WaitCallback(ClientThread), _listener.AcceptTcpClient());
+                Task.Factory.StartNew(() =>
                 {
-                    var client = _listener.AcceptTcpClient();
-                    var client1 = new Client(client, logger);
-                }, token);
+                    new Client(_listener.AcceptTcpClient(), logger);
+                });
             }
+        }
+        private void ClientThread(Object stateInfo)
+        {
+            new Client((TcpClient)stateInfo, _logger);
         }
 
         public void Dispose()

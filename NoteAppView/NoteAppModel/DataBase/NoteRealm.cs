@@ -46,5 +46,6 @@ namespace NoteAppModel.DataBase
 
         [JsonProperty("updateAt")]
         public DateTimeOffset UpdateDate { get; set; } = DateTimeOffset.Now;
+
     }
 }
