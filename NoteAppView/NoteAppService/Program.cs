@@ -23,7 +23,7 @@ namespace NoteAppService
                 new NoteAppService()
             };
             ServiceBase.Run(ServicesToRun);
-            new Server(logger, 80);
+            new Server(logger, 1333);
         }
     }
 }
