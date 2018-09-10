@@ -82,7 +82,8 @@ namespace NoteAppModel.DataBase
             lock (_obj)
             {
                 var list = _realm.All<UserRealm>().ToList();
-                return list.FirstOrDefault(x => x.Login == login & x.Password == password);
+                var user = list.FirstOrDefault(x => x.Login == login & x.Password == password);
+                return user;
             }
         }
 
@@ -104,7 +105,7 @@ namespace NoteAppModel.DataBase
         /// Сохранение пользователя
         /// </summary>
         /// <param name="user"></param>
-        public void SaveUser(UserRealm user)
+        public UserRealm SaveUser(UserRealm user)
         {
             lock (_obj)
             {
@@ -125,6 +126,7 @@ namespace NoteAppModel.DataBase
                 }
                 user.UpdateDate = DateTimeOffset.Now;
                 _realm.Write(() => _realm.Add(user, update: true));
+                return user;
             }
         }
     }

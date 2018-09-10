@@ -43,17 +43,17 @@ namespace NoteAppModelTest
         /// Сохранение пользователя
         /// </summary>
         /// <param name="result"></param>
-        internal bool SaveUser(UserRealm result)
+        internal UserRealm SaveUser(UserRealm result)
         {
             try
             {
                 var answer = MakeRequest("SaveUser", JsonConvert.SerializeObject(result));
-                return bool.Parse(answer);
+                return JsonConvert.DeserializeObject < UserRealm > (answer);
             }
             catch (Exception ex)
             {
                 _logger.Write(ex);
-                return true;
+                return null;
             }
         }
 

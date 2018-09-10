@@ -74,15 +74,14 @@ namespace NoteAppService
         /// <returns></returns>
         private string SaveUser(string param)
         {
-            var result = false;
+            var result = new UserRealm();
             try
             {
-                _dbHelper.SaveUser(Newtonsoft.Json.JsonConvert.DeserializeObject<UserRealm>(param));
-                result = true;
+                result = _dbHelper.SaveUser(Newtonsoft.Json.JsonConvert.DeserializeObject<UserRealm>(param));
             }
             catch
             {
-                result = false;
+                result = null;
             }
             return Serialize(result);
         }

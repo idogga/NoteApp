@@ -74,6 +74,7 @@
     <Compile Include="DataBase\RequisiteTypeEnum.cs" />
     <Compile Include="DataBase\UserRealm.cs" />
     <Compile Include="Logger.cs" />
+    <Compile Include="NoteTypes.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

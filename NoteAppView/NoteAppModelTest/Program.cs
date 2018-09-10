@@ -1,15 +1,13 @@
 ﻿using NoteAppModel;
 using NoteAppModel.DataBase;
 using System;
-using System.Net.Http;
 using System.Security.Cryptography;
 using System.Text;
 
 namespace NoteAppModelTest
 {
     public class Program
-    {
-        
+    {        
         static void Main(string[] args)
         {
             var logger = new Logger();
@@ -38,7 +36,14 @@ namespace NoteAppModelTest
             newNote.Title = Console.ReadLine();
             Console.WriteLine("Введите саму запись : ");
             newNote.ContentText = Console.ReadLine();
-            if(!httpHelper.SaveNote(newNote))
+            Console.WriteLine("Введите идентификаторы тэгов через пробел (1 2 3) : ");
+            var tagsString = Console.ReadLine();
+            var tagsArray = tagsString.Split(new char[] { ' ' });
+            foreach(var tag in tagsArray)
+            {
+                newNote.TagsLinks.Add(int.Parse(tag));
+            }
+            if (!httpHelper.SaveNote(newNote))
             {
                 Console.WriteLine("Не удалось сохранить запись. Попробуйте снова!");
                 AddNotes(user, httpHelper);
@@ -60,7 +65,7 @@ namespace NoteAppModelTest
             {
                 foreach (var note in listnotes)
                 {
-                    Console.WriteLine(note.NoteKey + " | " + note.Title + " | " + note.CreateDate + " | " + note.ContentText);
+                    Console.WriteLine(note.NoteKey + " | " + note.Title + " | " + (new NoteTypes()).GetTypesString(note.TagsLinks) + " | " + note.CreateDate + " | " + note.ContentText);
                 }
             }
             else
@@ -76,17 +81,18 @@ namespace NoteAppModelTest
             result.Login = Console.ReadLine();
             if (_httpHelper.IsContain(result.Login))
             {
-                Console.WriteLine("Пользователь с таким логином существует. Ппопробуйте что-то новое." + Environment.NewLine);
+                Console.WriteLine("Пользователь с таким логином существует. Попробуйте что-то новое." + Environment.NewLine);
                 return Registration(_httpHelper);
             }
             Console.WriteLine("Введите пароль : ");
             result.Password = Encoding.UTF8.GetString((new SHA1CryptoServiceProvider()).ComputeHash(Encoding.UTF8.GetBytes(Console.ReadLine())));
-            if(!_httpHelper.SaveUser(result))
+            var answer = _httpHelper.SaveUser(result);
+            if (answer == null)
             {
                 Console.WriteLine("При сохранении произошла ошибка! Попробуйте еще раз!");
                 Registration(_httpHelper);
             }
-            return result; 
+            return answer; 
         }
 
         private static bool NeedRegistration()
@@ -118,7 +124,6 @@ namespace NoteAppModelTest
                 return user;
             }
         }
-
 
     }
 }
