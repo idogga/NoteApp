@@ -69,6 +69,7 @@
   <ItemGroup>
     <Compile Include="DataBase\DataBaseHelper.cs" />
     <Compile Include="DataBase\ImageRealm.cs" />
+    <Compile Include="DataBase\NoteFlagEnum.cs" />
     <Compile Include="DataBase\NoteRealm.cs" />
     <Compile Include="DataBase\RequisiteRealm.cs" />
     <Compile Include="DataBase\RequisiteTypeEnum.cs" />

@@ -56,5 +56,15 @@ namespace NoteAppModel.DataBase
         [JsonProperty("updateAt")]
         public DateTimeOffset UpdateDate { get; set; } = DateTimeOffset.Now;
 
+        /// <summary>
+        /// Флаги
+        /// </summary>
+        [JsonProperty("flags")]
+        public int Flags { get; set; } = 0;
+
+        public bool IsFlagOpen(NoteFlagEnum flag)
+        {
+            return ((int)flag & Flags) == (int)flag;
+        }
     }
 }

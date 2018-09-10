@@ -39,7 +39,10 @@ namespace NoteAppModel.DataBase
         public List<NoteRealm> GetAllNotes(int userId)
         {
             lock (_obj)
-                return _realm.All<NoteRealm>().Where(x => x.UserId == userId).OrderByDescending(y => y.UpdateDate).ToList();
+            {
+                var list = _realm.All<NoteRealm>().Where(x => x.UserId == userId).OrderByDescending(y => y.UpdateDate).ToList();
+                return list.Where(x => !x.IsFlagOpen(NoteFlagEnum.Delete)).ToList();
+            }
         }
 
         /// <summary>
