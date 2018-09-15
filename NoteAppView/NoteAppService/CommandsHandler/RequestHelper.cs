@@ -13,14 +13,7 @@ namespace NoteAppService
         {
             var methods = new Methods(logger);
             var availableCommands = methods.GetAvailableCommands();
-            if (availableCommands.Keys.Contains(command.ToUpper()))
-            {
-                _func = availableCommands[command.ToUpper()];
-            }
-            else
-            {
-                _func = null;
-            }
+            _func = availableCommands.Keys.Contains(command.ToUpper()) ? availableCommands[command.ToUpper()] : null;
         }
 
         public bool IsContains()

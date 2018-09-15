@@ -17,14 +17,14 @@ namespace NoteAppService
         {
             Logger logger = new Logger();
             logger.Write("Служба запущена");
-#if RELEASE
+//#if RELEASE
             ServiceBase[] ServicesToRun;
             ServicesToRun = new ServiceBase[]
             {
                 new NoteAppService()
             };
             ServiceBase.Run(ServicesToRun);
-#endif
+//#endif
             new Server(logger, 1333);
         }
     }

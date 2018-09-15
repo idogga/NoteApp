@@ -1,7 +1,6 @@
 ﻿using Newtonsoft.Json;
 using NoteAppModel;
 using NoteAppModel.DataBase;
-using System;
 using System.Collections.Generic;
 
 namespace NoteAppService

@@ -25,10 +25,10 @@ namespace NoteAppService
             while (true)
             {
                 ThreadPool.QueueUserWorkItem(new WaitCallback(ClientThread), _listener.AcceptTcpClient());
-                Task.Factory.StartNew(() =>
-                {
-                    new Client(_listener.AcceptTcpClient(), logger);
-                });
+                //Task.Factory.StartNew(() =>
+                //{
+                //    new Client(_listener.AcceptTcpClient(), logger);
+                //});
             }
         }
 
