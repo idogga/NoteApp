@@ -55,7 +55,7 @@ namespace NoteAppModelTest
             }
         }
 
-        internal bool SaveNote(NoteRealm newNote)
+        internal bool SaveNote(NoteProtocol newNote)
         {
             try
             {
@@ -84,13 +84,13 @@ namespace NoteAppModelTest
             return user;
         }
 
-        internal List<NoteRealm> GetAllNotes(int userKey)
+        internal List<NoteProtocol> GetAllNotes(int userKey)
         {
-            List<NoteRealm> result = new List<NoteRealm>();
+            List<NoteProtocol> result = new List<NoteProtocol>();
             try
             {
                 var str = MakeRequest("GetAllNotes", JsonConvert.SerializeObject(userKey));
-                return JsonConvert.DeserializeObject<List<NoteRealm>>(str);
+                return JsonConvert.DeserializeObject<List<NoteProtocol>>(str);
             }
             catch
             {

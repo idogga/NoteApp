@@ -29,7 +29,7 @@ namespace NoteAppModelTest
 
         private static void AddNotes(UserRealm user, HttpController httpHelper)
         {
-            var newNote = new NoteRealm();
+            var newNote = new NoteProtocol();
             newNote.UserId = user.UserKey;
             Console.WriteLine("Введите название записи : ");
             newNote.Title = Console.ReadLine();

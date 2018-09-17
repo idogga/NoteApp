@@ -1,75 +1,79 @@
 ﻿using Newtonsoft.Json;
-using Realms;
+using NoteAppModel.DataBase;
+using NoteAppModel.Protocol;
 using System;
 using System.Collections.Generic;
 
-namespace NoteAppModel.DataBase
+namespace NoteAppModel
 {
-    public class NoteRealm : RealmObject
+    public class NoteProtocol : RequestProtocol
     {
         /// <summary>
         /// Первичный ключ для записи
         /// </summary>
-        [PrimaryKey]
+        [JsonProperty("key")]
         public int NoteKey { get; set; } = 0;
 
         /// <summary>
         /// Заголовок
         /// </summary>
+        [JsonProperty("title")]
         public string Title { get; set; } = string.Empty;
 
         /// <summary>
         /// Текст записи
         /// </summary>
+        [JsonProperty("content")]
         public string ContentText { get; set; } = string.Empty;
 
         /// <summary>
         /// Ссылки на изображения
         /// </summary>
-        public IList<int> ImageLinks { get; }
+        [JsonProperty("iLink")]
+        public List<int> ImageLinks { get; }
 
         /// <summary>
         /// Тэги
         /// </summary>
-        public IList<int> TagsLinks { get; }
+        [JsonProperty("tLink")]
+        public List<int> TagsLinks { get; }
 
         /// <summary>
         /// Пользовательский ключ
         /// </summary>
+        [JsonProperty("User")]
         public int UserId { get; set; } = 0;
 
         /// <summary>
         /// Дата создания
         /// </summary>
+        [JsonProperty("creteAt")]
         public DateTimeOffset CreateDate { get; set; } = DateTimeOffset.Now;
 
         /// <summary>
         /// Дата изменения
         /// </summary>
+        [JsonProperty("updateAt")]
         public DateTimeOffset UpdateDate { get; set; } = DateTimeOffset.Now;
 
         /// <summary>
         /// Флаги
         /// </summary>
+        [JsonProperty("flags")]
         public int Flags { get; set; } = 0;
 
-        public bool IsFlagOpen(NoteFlagEnum flag)
-        {
-            return ((int)flag & Flags) == (int)flag;
-        }
+        public NoteProtocol() { }
 
-        public NoteRealm() { }
-
-        public NoteRealm(NoteProtocol protocol)
+        public NoteProtocol(NoteRealm realm)
         {
-            NoteKey = protocol.NoteKey;
-            ContentText = protocol.ContentText;
-            ImageLinks = protocol.ImageLinks;
-            TagsLinks = protocol.TagsLinks;
-            UserId = protocol.UserId;
-            CreateDate = protocol.CreateDate;
-            UpdateDate = protocol.UpdateDate;
-            Flags = protocol.Flags;
+            NoteKey = realm.NoteKey;
+            ContentText = realm.ContentText;
+            ImageLinks = new List<int>(realm.ImageLinks);
+            TagsLinks = new List<int>(realm.TagsLinks);
+            UserId = realm.UserId;
+            CreateDate = realm.CreateDate;
+            UpdateDate = realm.UpdateDate;
+            Flags = realm.Flags;
         }
     }
 }

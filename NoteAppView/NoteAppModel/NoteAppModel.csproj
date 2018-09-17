@@ -75,8 +75,11 @@
     <Compile Include="DataBase\RequisiteTypeEnum.cs" />
     <Compile Include="DataBase\UserRealm.cs" />
     <Compile Include="Logger.cs" />
+    <Compile Include="Protocol\AnswerProtocolEnum.cs" />
+    <Compile Include="Protocol\NoteProtocol.cs" />
     <Compile Include="NoteTypes.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Protocol\RequestProtocol.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

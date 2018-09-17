@@ -113,11 +113,12 @@ namespace NoteAppService
         /// <returns></returns>
         private string GetAllNotes(string param)
         {
-            var result = new List<NoteRealm>();
+            var result = new List<NoteProtocol>();
             try
             {
                 var user = JsonConvert.DeserializeObject<int>(param);
-                result = _dbHelper.GetAllNotes(user);
+                foreach (var note in _dbHelper.GetAllNotes(user))
+                    result.Add(new NoteProtocol(note));
             }
             catch
             {
@@ -136,7 +137,7 @@ namespace NoteAppService
             var result = false;
             try
             {
-                _dbHelper.SaveNote(JsonConvert.DeserializeObject<NoteRealm>(param));
+                _dbHelper.SaveNote(new NoteRealm(JsonConvert.DeserializeObject<NoteProtocol>(param)));
                 result = true;
             }
             catch
