@@ -9,7 +9,7 @@ namespace NoteAppService
 {
     public class Client
     {
-        public Client(TcpClient client, Logger logger)
+        public Client(TcpClient client)
         {
             string request = "";
             byte[] buffer = new byte[2048];
@@ -26,14 +26,14 @@ namespace NoteAppService
             Match reqMatch = Regex.Match(request, @"^\w+\s+([^\s\?]+)[^\s]*\s+HTTP/.*|");
             if (reqMatch == Match.Empty)
             {
-                logger.Write("Ошибка в запросе");
+                Logger.GetInstance().Write("Ошибка в запросе");
                 SendError(client, 400);
                 return;
             }
-            logger.Write("Запрос : " + request);            
+            Logger.GetInstance().Write("Запрос : " + request);            
             var commands = request.Split(new string[] { "\r\n\r\n" }, StringSplitOptions.RemoveEmptyEntries);
             var reqs = commands[1].Split(new char[] { ':' });
-            var requestHelper = new RequestHelper(logger, reqs[0]);
+            var requestHelper = new RequestHelper(reqs[0]);
             if(requestHelper.IsContains())
             {
                 request = requestHelper.Execute(Encoding.UTF8.GetString(Convert.FromBase64String(reqs[1])));
@@ -45,7 +45,7 @@ namespace NoteAppService
                 return;
             }
             string headers = "HTTP/1.1 200 OK\r\nContent-Type: text/json\r\nContent-Length: " + buffer.Length + "\r\nConnection: Keep-Alive" + "\r\n\r\n";
-            logger.Write("Ответ на запрос : " + headers + request);
+            Logger.GetInstance().Write("Ответ на запрос : " + headers + request);
             byte[] headersBuffer = Encoding.ASCII.GetBytes(headers);
             client.GetStream().Write(headersBuffer, 0, headersBuffer.Length);
             client.GetStream().Write(buffer, 0, buffer.Length);

@@ -10,8 +10,7 @@ namespace NoteAppModelTest
     {        
         static void Main(string[] args)
         {
-            var logger = new Logger();
-            var _httpHelper = new HttpHelper(logger);
+            var _httpHelper = new HttpController();
             UserRealm user;
             if(NeedRegistration())
             {
@@ -21,14 +20,14 @@ namespace NoteAppModelTest
             {
                 user = Auth(_httpHelper);
             }
-            logger.Write("Авторизация пользователя " + user.Login);
+            Logger.GetInstance().Write("Авторизация пользователя " + user.Login);
             ShowList(user, _httpHelper);
             AddNotes(user, _httpHelper);
             ShowList(user, _httpHelper);
             Console.ReadKey();
         }
 
-        private static void AddNotes(UserRealm user, HttpHelper httpHelper)
+        private static void AddNotes(UserRealm user, HttpController httpHelper)
         {
             var newNote = new NoteRealm();
             newNote.UserId = user.UserKey;
@@ -57,7 +56,7 @@ namespace NoteAppModelTest
             }
         }
 
-        private static void ShowList(UserRealm user, HttpHelper httpHelper)
+        private static void ShowList(UserRealm user, HttpController httpHelper)
         {
             Console.WriteLine("Записи пользователя в БД : ");
             var listnotes = httpHelper.GetAllNotes(user.UserKey);
@@ -74,7 +73,7 @@ namespace NoteAppModelTest
             }
         }
 
-        private static UserRealm Registration(HttpHelper _httpHelper)
+        private static UserRealm Registration(HttpController _httpHelper)
         {
             var result = new UserRealm();
             Console.WriteLine("Введите логин : ");
@@ -107,7 +106,7 @@ namespace NoteAppModelTest
             return NeedRegistration();
         }
 
-        private static UserRealm Auth(HttpHelper _httpHelper)
+        private static UserRealm Auth(HttpController _httpHelper)
         {
             Console.WriteLine("Введите логин и через пробел пароль : ");
             var str = Console.ReadLine();

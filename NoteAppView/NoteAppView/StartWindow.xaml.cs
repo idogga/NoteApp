@@ -8,13 +8,11 @@ namespace NoteAppView
     /// </summary>
     public partial class StartWindow : Window
     {
-        private Logger _logger;
-
         public StartWindow()
         {
             InitializeComponent();
             InitializeHelpers();
-            _logger.Write("Загрузка формы прошла успешно!");
+            Logger.GetInstance().Write("Загрузка формы прошла успешно!");
         }
 
         /// <summary>
@@ -22,7 +20,6 @@ namespace NoteAppView
         /// </summary>
         private void InitializeHelpers()
         {
-            _logger = new Logger();
         }
     }
 }

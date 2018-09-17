@@ -9,9 +9,9 @@ namespace NoteAppService
     {
         private CommandDelegate _func;
 
-        public RequestHelper(Logger logger, string command)
+        public RequestHelper(string command)
         {
-            var methods = new Methods(logger);
+            var methods = new Methods();
             var availableCommands = methods.GetAvailableCommands();
             _func = availableCommands.Keys.Contains(command.ToUpper()) ? availableCommands[command.ToUpper()] : null;
         }

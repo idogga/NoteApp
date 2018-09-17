@@ -7,10 +7,15 @@ namespace NoteAppModel
     public class Logger
     {
         object _obj = new object();
+        private static Logger _instance;
 
-        public Logger()
+        public static Logger GetInstance()
         {
-
+            if(_instance == null)
+            {
+                _instance = new Logger();
+            }
+            return _instance;
         }
 
         #region Публичные методы

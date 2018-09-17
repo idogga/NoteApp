@@ -10,14 +10,12 @@ using System.Collections.Generic;
 
 namespace NoteAppModelTest
 {
-    public class HttpHelper
+    public class HttpController
     {
         private readonly HttpClient client = new HttpClient();
-        private Logger _logger;
 
-        public HttpHelper(Logger logger)
+        public HttpController()
         {
-            _logger = logger;
         }
 
         /// <summary>
@@ -34,7 +32,7 @@ namespace NoteAppModelTest
             }
             catch (Exception ex)
             {
-                _logger.Write(ex);
+                Logger.GetInstance().Write(ex);
                 return true;
             }
         }
@@ -52,7 +50,7 @@ namespace NoteAppModelTest
             }
             catch (Exception ex)
             {
-                _logger.Write(ex);
+                Logger.GetInstance().Write(ex);
                 return null;
             }
         }
@@ -66,7 +64,7 @@ namespace NoteAppModelTest
             }
             catch (Exception ex)
             {
-                _logger.Write(ex);
+                Logger.GetInstance().Write(ex);
                 return true;
             }
         }
@@ -110,7 +108,7 @@ namespace NoteAppModelTest
             request.ContentType = "text/json";
             request.ContentLength = bodyByte.Length;
             request.Timeout = 60000;
-            _logger.Write("Запрос отправлен : " + body);
+            Logger.GetInstance().Write("Запрос отправлен : " + body);
             using (var requestStream = request.GetRequestStream())
             {
                 requestStream.Write(bodyByte, 0, bodyByte.Length);
@@ -120,7 +118,7 @@ namespace NoteAppModelTest
                 using (StreamReader reader = new StreamReader(response.GetResponseStream()))
                 {
                     var responseString = Encoding.UTF8.GetString(Convert.FromBase64String(reader.ReadToEnd()));
-                    _logger.Write("Ответ получен : " + responseString);
+                    Logger.GetInstance().Write("Ответ получен : " + responseString);
                     return responseString;
                 }
             }

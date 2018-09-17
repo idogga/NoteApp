@@ -9,12 +9,10 @@ namespace NoteAppModel.DataBase
     public class DataBaseHelper
     {
         private object _obj = new object();
-        private Logger _logger;
         private Realm _realm;
 
-        public DataBaseHelper(Logger logger)
+        public DataBaseHelper()
         {
-            _logger = logger;
             string path = $"{Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData)}\\RealmDesktop";
             bool isDatabaseInitialized = Directory.Exists(path);
             if (!isDatabaseInitialized)
