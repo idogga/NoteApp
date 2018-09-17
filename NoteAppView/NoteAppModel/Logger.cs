@@ -1,6 +1,5 @@
 ﻿using System;
 using System.IO;
-using System.Text;
 
 namespace NoteAppModel
 {
@@ -29,7 +28,7 @@ namespace NoteAppModel
             {
                 var log = GetLogString(str);
                 System.Diagnostics.Debug.WriteLine(log);
-                File.AppendAllText(AppDomain.CurrentDomain.BaseDirectory + "Log-" + DateTime.Now.ToShortDateString() + ".log", log + Environment.NewLine);
+                File.AppendAllText(AppDomain.CurrentDomain.BaseDirectory + "Log-" + DateTime.Now.ToString("yyyy-MM-dd") + ".log", log + Environment.NewLine);
             }
         }
 
@@ -43,7 +42,7 @@ namespace NoteAppModel
             {
                 var log = GetLogString(Newtonsoft.Json.JsonConvert.SerializeObject(obj));
                 System.Diagnostics.Debug.WriteLine(log);
-                File.AppendAllText(AppDomain.CurrentDomain.BaseDirectory + "Log-" + DateTime.Now.ToShortDateString() + ".log", log + Environment.NewLine);
+                File.AppendAllText(AppDomain.CurrentDomain.BaseDirectory + "Log-" + DateTime.Now.ToString("yyyy-MM-dd") + ".log", log + Environment.NewLine);
             }
         }
 
@@ -57,7 +56,7 @@ namespace NoteAppModel
             {
                 var log = GetLogString("Ошибка : " + ex.Message+Environment.NewLine+ex.StackTrace);
                 System.Diagnostics.Debug.WriteLine(log);
-                File.AppendAllText(AppDomain.CurrentDomain.BaseDirectory + "Ошибки-" + DateTime.Now.ToShortDateString() + ".log", log + Environment.NewLine);
+                File.AppendAllText(AppDomain.CurrentDomain.BaseDirectory + "Errors-" + DateTime.Now.ToString("yyyy-MM-dd") + ".log", log + Environment.NewLine);
             }
         }
         #endregion
@@ -71,7 +70,7 @@ namespace NoteAppModel
         /// <returns>Запись</returns>
         private string GetLogString(string str)
         {
-            return $"LOG {DateTime.Now.ToLongTimeString()} : {str}";
+            return $"LOG {DateTime.Now.ToString("HH:mm:ss:fff")} : {str}";
         }
 
         #endregion

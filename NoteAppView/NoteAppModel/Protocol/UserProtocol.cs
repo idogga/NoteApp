@@ -1,53 +1,57 @@
 ﻿using Newtonsoft.Json;
-using NoteAppModel.Protocol;
-using Realms;
+using NoteAppModel.DataBase;
 using System;
 
-namespace NoteAppModel.DataBase
+namespace NoteAppModel.Protocol
 {
-    public class UserRealm : RealmObject
+    public class UserProtocol : RequestProtocol
     {
         /// <summary>
         /// Первичный ключ
         /// </summary>
-        [PrimaryKey]
+        [JsonProperty("key")]
         public int UserKey { get; set; } = 0;
 
         /// <summary>
         /// Логин
         /// </summary>
+        [JsonProperty("login")]
         public string Login { get; set; } = string.Empty;
 
         /// <summary>
         /// Пароль
         /// </summary>
+        [JsonProperty("pass")]
         public string Password { get; set; } = string.Empty;
 
         /// <summary>
         /// Дата создания
         /// </summary>
+        [JsonProperty("createAt")]
         public DateTimeOffset CreateDate { get; set; } = DateTimeOffset.Now;
 
         /// <summary>
         /// Дата изменения профиля
         /// </summary>
+        [JsonProperty("updateAt")]
         public DateTimeOffset UpdateDate { get; set; } = DateTimeOffset.Now;
 
         /// <summary>
         /// Флаги
         /// </summary>
+        [JsonProperty("flags")]
         public int Flags { get; set; } = 0;
 
-        public UserRealm() { }
+        public UserProtocol() { }
 
-        public UserRealm(UserProtocol protocol)
+        public UserProtocol(UserRealm realm)
         {
-            UserKey = protocol.UserKey;
-            Login = protocol.Login;
-            Password = protocol.Password;
-            CreateDate = protocol.CreateDate;
-            UpdateDate = protocol.UpdateDate;
-            Flags = protocol.Flags;
+            UserKey = realm.UserKey;
+            Login = realm.Login;
+            Password = realm.Password;
+            CreateDate = realm.CreateDate;
+            UpdateDate = realm.UpdateDate;
+            Flags = realm.Flags;
         }
     }
 }

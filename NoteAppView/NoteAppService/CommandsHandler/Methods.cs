@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using NoteAppModel;
 using NoteAppModel.DataBase;
+using NoteAppModel.Protocol;
 using System.Collections.Generic;
 
 namespace NoteAppService
@@ -74,10 +75,10 @@ namespace NoteAppService
         /// <returns></returns>
         private string SaveUser(string param)
         {
-            var result = new UserRealm();
+            var result = new UserProtocol();
             try
             {
-                result = _dbHelper.SaveUser(Newtonsoft.Json.JsonConvert.DeserializeObject<UserRealm>(param));
+                result = new UserProtocol(_dbHelper.SaveUser(new UserRealm(Newtonsoft.Json.JsonConvert.DeserializeObject<UserProtocol>(param))));
             }
             catch
             {
@@ -93,11 +94,11 @@ namespace NoteAppService
         /// <returns></returns>
         private string GetUser(string param)
         {
-            var result = new UserRealm();
+            var result = new UserProtocol();
             try
             {
-                var user = JsonConvert.DeserializeObject<UserRealm>(param);
-                result = _dbHelper.GetUser(user.Login, user.Password);
+                var user = JsonConvert.DeserializeObject<UserProtocol>(param);
+                result = new UserProtocol(_dbHelper.GetUser(user.Login, user.Password));
             }
             catch
             {

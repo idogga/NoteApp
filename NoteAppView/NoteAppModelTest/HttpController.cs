@@ -7,6 +7,7 @@ using System.Net.Http;
 using System.Text;
 using Newtonsoft.Json;
 using System.Collections.Generic;
+using NoteAppModel.Protocol;
 
 namespace NoteAppModelTest
 {
@@ -41,12 +42,12 @@ namespace NoteAppModelTest
         /// Сохранение пользователя
         /// </summary>
         /// <param name="result"></param>
-        internal UserRealm SaveUser(UserRealm result)
+        internal UserProtocol SaveUser(UserProtocol result)
         {
             try
             {
                 var answer = MakeRequest("SaveUser", JsonConvert.SerializeObject(result));
-                return JsonConvert.DeserializeObject < UserRealm > (answer);
+                return JsonConvert.DeserializeObject <UserProtocol> (answer);
             }
             catch (Exception ex)
             {
@@ -69,13 +70,13 @@ namespace NoteAppModelTest
             }
         }
 
-        internal UserRealm GetUser(string login, string pass)
+        internal UserProtocol GetUser(string login, string pass)
         {
-            UserRealm user = new UserRealm() { Login = login, Password = pass };
+            var user = new UserProtocol() { Login = login, Password = pass };
             try
             {
                 var str = MakeRequest("getUser", JsonConvert.SerializeObject(user));
-                return JsonConvert.DeserializeObject<UserRealm>(str);
+                return JsonConvert.DeserializeObject<UserProtocol>(str);
             }
             catch
             {

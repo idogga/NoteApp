@@ -1,5 +1,6 @@
 ﻿using NoteAppModel;
 using NoteAppModel.DataBase;
+using NoteAppModel.Protocol;
 using System;
 using System.Security.Cryptography;
 using System.Text;
@@ -11,7 +12,7 @@ namespace NoteAppModelTest
         static void Main(string[] args)
         {
             var _httpHelper = new HttpController();
-            UserRealm user;
+            UserProtocol user;
             if(NeedRegistration())
             {
                 user = Registration(_httpHelper);
@@ -27,7 +28,7 @@ namespace NoteAppModelTest
             Console.ReadKey();
         }
 
-        private static void AddNotes(UserRealm user, HttpController httpHelper)
+        private static void AddNotes(UserProtocol user, HttpController httpHelper)
         {
             var newNote = new NoteProtocol();
             newNote.UserId = user.UserKey;
@@ -37,10 +38,17 @@ namespace NoteAppModelTest
             newNote.ContentText = Console.ReadLine();
             Console.WriteLine("Введите идентификаторы тэгов через пробел (1 2 3) : ");
             var tagsString = Console.ReadLine();
-            var tagsArray = tagsString.Split(new char[] { ' ' });
-            foreach(var tag in tagsArray)
+            try
             {
-                newNote.TagsLinks.Add(int.Parse(tag));
+                var tagsArray = tagsString.Split(new char[] { ' ' });
+                foreach (var tag in tagsArray)
+                {
+                    newNote.TagsLinks.Add(int.Parse(tag));
+                }
+            }
+            catch
+            {
+                newNote.TagsLinks.Add(1);
             }
             if (!httpHelper.SaveNote(newNote))
             {
@@ -56,7 +64,7 @@ namespace NoteAppModelTest
             }
         }
 
-        private static void ShowList(UserRealm user, HttpController httpHelper)
+        private static void ShowList(UserProtocol user, HttpController httpHelper)
         {
             Console.WriteLine("Записи пользователя в БД : ");
             var listnotes = httpHelper.GetAllNotes(user.UserKey);
@@ -73,9 +81,9 @@ namespace NoteAppModelTest
             }
         }
 
-        private static UserRealm Registration(HttpController _httpHelper)
+        private static UserProtocol Registration(HttpController _httpHelper)
         {
-            var result = new UserRealm();
+            var result = new UserProtocol();
             Console.WriteLine("Введите логин : ");
             result.Login = Console.ReadLine();
             if (_httpHelper.IsContain(result.Login))
@@ -106,7 +114,7 @@ namespace NoteAppModelTest
             return NeedRegistration();
         }
 
-        private static UserRealm Auth(HttpController _httpHelper)
+        private static UserProtocol Auth(HttpController _httpHelper)
         {
             Console.WriteLine("Введите логин и через пробел пароль : ");
             var str = Console.ReadLine();

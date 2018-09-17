@@ -11,6 +11,7 @@ namespace NoteAppService
     {
         public Client(TcpClient client)
         {
+            Logger.GetInstance().Write("Запрос получен");
             string request = "";
             byte[] buffer = new byte[2048];
             int count;
@@ -50,6 +51,7 @@ namespace NoteAppService
             client.GetStream().Write(headersBuffer, 0, headersBuffer.Length);
             client.GetStream().Write(buffer, 0, buffer.Length);
             client.Close();
+            Logger.GetInstance().Write("Конец отправки");
         }
 
         /// <summary>

@@ -80,6 +80,7 @@
     <Compile Include="NoteTypes.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Protocol\RequestProtocol.cs" />
+    <Compile Include="Protocol\UserProtocol.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

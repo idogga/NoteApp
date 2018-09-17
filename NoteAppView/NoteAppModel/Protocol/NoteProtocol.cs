@@ -30,13 +30,13 @@ namespace NoteAppModel
         /// Ссылки на изображения
         /// </summary>
         [JsonProperty("iLink")]
-        public List<int> ImageLinks { get; }
+        public List<int> ImageLinks { get; set; } = new List<int>();
 
         /// <summary>
         /// Тэги
         /// </summary>
         [JsonProperty("tLink")]
-        public List<int> TagsLinks { get; }
+        public List<int> TagsLinks { get; set; } = new List<int>();
 
         /// <summary>
         /// Пользовательский ключ
