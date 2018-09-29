@@ -11,17 +11,17 @@ namespace NoteAppModel.DataBase
         /// Первичный ключ для записи
         /// </summary>
         [PrimaryKey]
-        public int NoteKey { get; set; } = 0;
+        public int NoteKey { get; set; } 
 
         /// <summary>
         /// Заголовок
         /// </summary>
-        public string Title { get; set; } = string.Empty;
+        public string Title { get; set; }
 
         /// <summary>
         /// Текст записи
         /// </summary>
-        public string ContentText { get; set; } = string.Empty;
+        public string ContentText { get; set; }
 
         /// <summary>
         /// Ссылки на изображения
@@ -36,22 +36,22 @@ namespace NoteAppModel.DataBase
         /// <summary>
         /// Пользовательский ключ
         /// </summary>
-        public int UserId { get; set; } = 0;
+        public int UserId { get; set; }
 
         /// <summary>
         /// Дата создания
         /// </summary>
-        public DateTimeOffset CreateDate { get; set; } = DateTimeOffset.Now;
+        public DateTimeOffset CreateDate { get; set; } 
 
         /// <summary>
         /// Дата изменения
         /// </summary>
-        public DateTimeOffset UpdateDate { get; set; } = DateTimeOffset.Now;
+        public DateTimeOffset UpdateDate { get; set; }
 
         /// <summary>
         /// Флаги
         /// </summary>
-        public int Flags { get; set; } = 0;
+        public int Flags { get; set; }
 
         public bool IsFlagOpen(NoteFlagEnum flag)
         {

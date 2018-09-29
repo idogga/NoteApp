@@ -4,6 +4,6 @@
              xmlns:local="clr-namespace:NoteAppView"
              StartupUri="StartWindow.xaml">
     <Application.Resources>
-         
+        <Color x:Key="ButtonColor1">Blue</Color>
     </Application.Resources>
 </Application>

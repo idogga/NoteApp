@@ -10,37 +10,37 @@ namespace NoteAppModel.Protocol
         /// Первичный ключ
         /// </summary>
         [JsonProperty("key")]
-        public int UserKey { get; set; } = 0;
+        public int UserKey { get; set; }
 
         /// <summary>
         /// Логин
         /// </summary>
         [JsonProperty("login")]
-        public string Login { get; set; } = string.Empty;
+        public string Login { get; set; }
 
         /// <summary>
         /// Пароль
         /// </summary>
         [JsonProperty("pass")]
-        public string Password { get; set; } = string.Empty;
+        public string Password { get; set; }
 
         /// <summary>
         /// Дата создания
         /// </summary>
         [JsonProperty("createAt")]
-        public DateTimeOffset CreateDate { get; set; } = DateTimeOffset.Now;
+        public DateTimeOffset CreateDate { get; set; } 
 
         /// <summary>
         /// Дата изменения профиля
         /// </summary>
         [JsonProperty("updateAt")]
-        public DateTimeOffset UpdateDate { get; set; } = DateTimeOffset.Now;
+        public DateTimeOffset UpdateDate { get; set; }
 
         /// <summary>
         /// Флаги
         /// </summary>
         [JsonProperty("flags")]
-        public int Flags { get; set; } = 0;
+        public int Flags { get; set; }
 
         public UserProtocol() { }
 

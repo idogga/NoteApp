@@ -8,7 +8,7 @@ namespace NoteAppModel.DataBase
         /// Первичный ключ
         /// </summary>
         [PrimaryKey]
-        public int RequisiteKey { get; set; } = 0;
+        public int RequisiteKey { get; set; }
 
         /// <summary>
         /// Ключ пользователя
@@ -23,7 +23,7 @@ namespace NoteAppModel.DataBase
         /// <summary>
         /// Данные
         /// </summary>
-        public string Data { get; set; } = string.Empty;
+        public string Data { get; set; }
 
         public RequisiteRealm() { }
 

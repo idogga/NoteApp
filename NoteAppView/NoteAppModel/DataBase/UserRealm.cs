@@ -11,32 +11,32 @@ namespace NoteAppModel.DataBase
         /// Первичный ключ
         /// </summary>
         [PrimaryKey]
-        public int UserKey { get; set; } = 0;
+        public int UserKey { get; set; }
 
         /// <summary>
         /// Логин
         /// </summary>
-        public string Login { get; set; } = string.Empty;
+        public string Login { get; set; }
 
         /// <summary>
         /// Пароль
         /// </summary>
-        public string Password { get; set; } = string.Empty;
+        public string Password { get; set; }
 
         /// <summary>
         /// Дата создания
         /// </summary>
-        public DateTimeOffset CreateDate { get; set; } = DateTimeOffset.Now;
+        public DateTimeOffset CreateDate { get; set; }
 
         /// <summary>
         /// Дата изменения профиля
         /// </summary>
-        public DateTimeOffset UpdateDate { get; set; } = DateTimeOffset.Now;
+        public DateTimeOffset UpdateDate { get; set; }
 
         /// <summary>
         /// Флаги
         /// </summary>
-        public int Flags { get; set; } = 0;
+        public int Flags { get; set; }
 
         public UserRealm() { }
 

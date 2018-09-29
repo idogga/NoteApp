@@ -12,55 +12,55 @@ namespace NoteAppModel
         /// Первичный ключ для записи
         /// </summary>
         [JsonProperty("key")]
-        public int NoteKey { get; set; } = 0;
+        public int NoteKey { get; set; }
 
         /// <summary>
         /// Заголовок
         /// </summary>
         [JsonProperty("title")]
-        public string Title { get; set; } = string.Empty;
+        public string Title { get; set; }
 
         /// <summary>
         /// Текст записи
         /// </summary>
         [JsonProperty("content")]
-        public string ContentText { get; set; } = string.Empty;
+        public string ContentText { get; set; } 
 
         /// <summary>
         /// Ссылки на изображения
         /// </summary>
         [JsonProperty("iLink")]
-        public List<int> ImageLinks { get; set; } = new List<int>();
+        public List<int> ImageLinks { get; set; }
 
         /// <summary>
         /// Тэги
         /// </summary>
         [JsonProperty("tLink")]
-        public List<int> TagsLinks { get; set; } = new List<int>();
+        public List<int> TagsLinks { get; set; }
 
         /// <summary>
         /// Пользовательский ключ
         /// </summary>
         [JsonProperty("User")]
-        public int UserId { get; set; } = 0;
+        public int UserId { get; set; }
 
         /// <summary>
         /// Дата создания
         /// </summary>
         [JsonProperty("creteAt")]
-        public DateTimeOffset CreateDate { get; set; } = DateTimeOffset.Now;
+        public DateTimeOffset CreateDate { get; set; }
 
         /// <summary>
         /// Дата изменения
         /// </summary>
         [JsonProperty("updateAt")]
-        public DateTimeOffset UpdateDate { get; set; } = DateTimeOffset.Now;
+        public DateTimeOffset UpdateDate { get; set; }
 
         /// <summary>
         /// Флаги
         /// </summary>
         [JsonProperty("flags")]
-        public int Flags { get; set; } = 0;
+        public int Flags { get; set; }
 
         public NoteProtocol() { }
 
