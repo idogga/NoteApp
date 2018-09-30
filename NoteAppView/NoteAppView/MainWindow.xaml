@@ -36,9 +36,7 @@
     </Window.Triggers>
 
     <Grid Background="#FFDEDEDE">
-        <Grid x:Name="GridMain" HorizontalAlignment="Right" 
-              VerticalAlignment="Bottom" 
-              Height="540" Width="730"/>
+        
         <Grid Height="60" VerticalAlignment="Top" 
               Background="#FF5C99D6">
             <Grid.Effect>
@@ -58,6 +56,9 @@
             </StackPanel>
             <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="22">Блокнот</TextBlock>
         </Grid>
+        <Grid x:Name="GridMain" HorizontalAlignment="Right" 
+              VerticalAlignment="Bottom" 
+              Height="540" Width="730"/>
         <Grid x:Name="GridMenu" Width="70" HorizontalAlignment="Left" Background="#FF31577E">
             <Grid.Effect>
                 <DropShadowEffect BlurRadius="2" ShadowDepth="1" Color="#FFAEAEAE"/>

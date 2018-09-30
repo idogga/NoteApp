@@ -8,28 +8,68 @@
              mc:Ignorable="d"
              ScrollViewer.VerticalScrollBarVisibility="Disabled">
     <Grid
-        Margin="0,170,0,0">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="AUTO"/>
-            <RowDefinition Height="AUTO"/>
-            <RowDefinition Height="AUTO"/>
-            <RowDefinition Height="AUTO"/>
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="30*"/>
-            <ColumnDefinition Width="70*"/>
-        </Grid.ColumnDefinitions>
-        <Label Grid.Column="0" Grid.Row="0" VerticalContentAlignment="Center"
-               HorizontalContentAlignment="Right">Login</Label>
-        <TextBox x:Name="loginTextBox" Grid.Column="1" Grid.Row="0"
-                  VerticalContentAlignment="Center">login</TextBox>
-        <Label Grid.Column="0" Grid.Row="1"
-                VerticalContentAlignment="Center"
-               HorizontalContentAlignment="Right">Password</Label>
-        <TextBox x:Name="passTextBox" Grid.Column="1" Grid.Row="1"
-                  VerticalContentAlignment="Center">pass</TextBox>
+        Margin="10,160,0,0" Height="344" Width="430">
+        <Rectangle RadiusY="8" RadiusX="8" Fill="White" Margin="0,0,0,50"/>
+        <Rectangle Margin="200,0,0,50">
+            <Rectangle.Fill>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#CC935E12" Offset="1"/>
+                    <GradientStop Color="#CCEA4646"/>
+                    <GradientStop Color="#CCB89128" Offset="0.566"/>
+                </LinearGradientBrush>
+            </Rectangle.Fill>
+        </Rectangle>
+        <StackPanel Margin="20,10,225,50"
+                    MaxWidth="200">
+            <Label Content="Авторизация" FontFamily="Segoe UI Black" FontSize="24" Margin="0,10" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+            <StackPanel Margin="0,5" Orientation="Horizontal">
+                <materialDesign:PackIcon Kind="Account" VerticalAlignment="Center" Foreground="#707070"/>
+                <TextBox x:Name="loginTextBox" materialDesign:HintAssist.Hint="логин.com" Width="149" Margin="5"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <materialDesign:PackIcon Kind="Key" VerticalAlignment="Center" Foreground="#707070"/>
+                <PasswordBox  x:Name="passTextBox" materialDesign:HintAssist.Hint="пароль" Width="151" Margin="5"/>
+            </StackPanel>
+            <Button HorizontalAlignment="Center" 
+                    Content="Авторизоваться" FontFamily="Impact" 
+                    FontSize="18" 
+                    Background="#FF307CD6" BorderBrush="#FF307CD6"/>
 
-        <Button Grid.Column="1" Grid.Row="2" Click="AuthBtnClick" ForceCursor="True">auth</Button>
-        <Button Grid.Column="1" Grid.Row="3" Click="RegisterBtnClick">register</Button>
+            <Label Content="Авторизоваться через"  Margin="10"
+                   Foreground="#707070" VerticalAlignment="Center" Height="35"/>
+            <StackPanel Orientation="Horizontal">
+                <Button HorizontalAlignment="Center" FontFamily="Impact" FontSize="18" Background="#FF3D56AC" BorderBrush="#FF3D56AC"
+                        Click="AdditionalButtonClick">
+                    <materialDesign:PackIcon Kind="Facebook" VerticalAlignment="Center" Foreground="White"/>
+                </Button>
+                <Button HorizontalAlignment="Center" FontFamily="Impact" FontSize="18" Margin="15,0" Background="#FF01BAFF" BorderBrush="#FF01BAFF"
+                        Click="AdditionalButtonClick">
+                    <materialDesign:PackIcon Kind="Twitter" VerticalAlignment="Center" Foreground="White"/>
+                </Button>
+                <Button HorizontalAlignment="Center" FontFamily="Impact" FontSize="18" Background="#FFE05959" BorderBrush="#FFE05959"
+                        Click="AdditionalButtonClick">
+                    <materialDesign:PackIcon Kind="GooglePlus" VerticalAlignment="Center" Foreground="White"/>
+                </Button>
+            </StackPanel>
+        </StackPanel>
+        <StackPanel Margin="200,50,0,50">
+            <TextBlock Text="NoteApp" 
+                       Foreground="White" 
+                       HorizontalAlignment="Center" 
+                       FontSize="40" 
+                       FontFamily="Champagne &amp; Limousines" 
+                       FontWeight="Bold"/>
+            <TextBlock Text="Лучшее приложение для создания и хранения моих заметок. Великолепно!" Foreground="White" 
+                       HorizontalAlignment="Center" 
+                       Width="200" FontSize="20" 
+                       FontFamily="Champagne &amp; Limousines" 
+                       TextWrapping="Wrap" TextAlignment="Center" 
+                       Margin="0,40,0,0"/>
+            <TextBlock Text="А.Е.Горяинов" Foreground="White" 
+                       FontSize="15" 
+                       FontFamily="Champagne &amp; Limousines" 
+                       TextWrapping="Wrap" TextAlignment="Right" 
+                       Margin="10"/>
+        </StackPanel>
     </Grid>
 </UserControl>

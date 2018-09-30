@@ -16,12 +16,12 @@ namespace NoteAppView.Controls
 
         private void AuthBtnClick(object sender, RoutedEventArgs e)
         {
-            var user = HttpController.GetInstance().GetUser(loginTextBox.Text, passTextBox.Text);
+            var user = HttpController.GetInstance().GetUser(loginTextBox.Text, passTextBox.Password);
             if(user == null)
             {
                 MessageBox.Show("Неверный логин / пароль", "", MessageBoxButton.OK);
                 loginTextBox.Text = "";
-                loginTextBox.Text = "";
+                passTextBox.Password = "";
             }
             else
             {
@@ -33,6 +33,11 @@ namespace NoteAppView.Controls
         private void RegisterBtnClick(object sender, RoutedEventArgs e)
         {
 
+        }
+
+        private void AdditionalButtonClick(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Данная функция находится в разработке");
         }
     }
 }
