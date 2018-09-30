@@ -2,8 +2,11 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:NoteAppView"
-             StartupUri="StartWindow.xaml">
+             StartupUri="LoginWindow.xaml">
     <Application.Resources>
-        <Color x:Key="ButtonColor1">Blue</Color>
+        <Color x:Key="backColor">Blue</Color>
+        <Color x:Key="backObjColor">White</Color>
+        <Color x:Key="mainColor">Red</Color>
+        <Color x:Key="letterColor">Green</Color>
     </Application.Resources>
 </Application>
