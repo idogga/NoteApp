@@ -7,15 +7,24 @@ using System.IO;
 using System.Net;
 using System.Net.Http;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace NoteAppView
 {
     public class HttpController
     {
         private readonly HttpClient client = new HttpClient();
+        private static HttpController _instance;
 
-        public HttpController()
+        private HttpController()
         {
+        }
+
+        public static HttpController GetInstance()
+        {
+            if (_instance == null)
+                _instance = new HttpController();
+            return _instance;
         }
 
         /// <summary>

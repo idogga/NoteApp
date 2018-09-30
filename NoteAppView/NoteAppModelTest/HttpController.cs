@@ -1,13 +1,12 @@
-﻿using NoteAppModel;
-using NoteAppModel.DataBase;
+﻿using Newtonsoft.Json;
+using NoteAppModel;
+using NoteAppModel.Protocol;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Net;
 using System.Net.Http;
 using System.Text;
-using Newtonsoft.Json;
-using System.Collections.Generic;
-using NoteAppModel.Protocol;
 
 namespace NoteAppModelTest
 {
