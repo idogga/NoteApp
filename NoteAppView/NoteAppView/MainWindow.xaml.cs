@@ -3,6 +3,7 @@ using NoteAppView.Controls;
 using System;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media.Animation;
 
 namespace NoteAppView
 {
@@ -77,7 +78,22 @@ namespace NoteAppView
 
         private void ShowAllMenu(object data)
         {
-            
+            GridMain.Dispatcher.Invoke(new Action(() =>
+            {
+                FadeTo(itemList);
+                FadeTo(newNoteItem);
+                userNameText.Text = ViewDataController.GetInstance().UserData.Login;
+            }));
+        }
+
+        private void FadeTo(ListViewItem control)
+        {
+            DoubleAnimation da = new DoubleAnimation();
+            da.From = control.Opacity;
+            da.To = 1;
+            da.Duration = new Duration(TimeSpan.FromSeconds(2));
+            da.AutoReverse = false;
+            control.BeginAnimation(OpacityProperty, da);
         }
 
         private void ShowRegister()

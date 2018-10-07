@@ -12,6 +12,7 @@ namespace NoteAppView.Controls
         public AuthControl()
         {
             InitializeComponent();
+            loginTextBox.Focus();
         }
 
         private void AuthBtnClick(object sender, RoutedEventArgs e)
