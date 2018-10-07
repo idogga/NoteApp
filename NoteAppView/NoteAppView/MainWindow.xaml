@@ -5,10 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:NoteAppView"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-        mc:Ignorable="d" Height="450" 
-        Width="800" ResizeMode="NoResize" 
+        mc:Ignorable="d" Height="450" MinHeight="450" MinWidth="800"
+        Width="800" ResizeMode="CanResize" 
         WindowStartupLocation="CenterScreen" 
-        WindowStyle="None"
+        WindowStyle="SingleBorderWindow"
         FontFamily="pack://application:,,,/MaterialDesignThemes.Wpf;component/Resources/Roboto/#Roboto"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
         Background="{DynamicResource MaterialDesignPaper}">
@@ -56,9 +56,7 @@
             </StackPanel>
             <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="22">Блокнот</TextBlock>
         </Grid>
-        <Grid x:Name="GridMain" HorizontalAlignment="Right" 
-              VerticalAlignment="Bottom" 
-              Height="540" Width="730"/>
+        
         <Grid x:Name="GridMenu" Width="70" HorizontalAlignment="Left" Background="#FF31577E">
             <Grid.Effect>
                 <DropShadowEffect BlurRadius="2" ShadowDepth="1" Color="#FFAEAEAE"/>
@@ -116,5 +114,9 @@
                 </ListView>
             </StackPanel>
         </Grid>
+
+        <Grid x:Name="GridMain" Margin="70,70,0,0"
+              VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
+              Height="540" Width="730"/>
     </Grid>
 </Window>

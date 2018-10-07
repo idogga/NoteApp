@@ -32,7 +32,7 @@ namespace NoteAppView.Controls
 
         private void RegisterBtnClick(object sender, RoutedEventArgs e)
         {
-
+            MainWindow.InvokeEvent(MainWindowAction.Register, this, null);
         }
 
         private void AdditionalButtonClick(object sender, RoutedEventArgs e)
