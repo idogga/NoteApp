@@ -27,6 +27,7 @@ namespace NoteAppView.Controls
             {
                 ViewDataController.GetInstance().UserData = user;
                 Logger.GetInstance().Write("Пользователь : " + user.UserKey + " авторизован");
+                MainWindow.InvokeEvent(MainWindowAction.List, this, user);
             }
         }
 

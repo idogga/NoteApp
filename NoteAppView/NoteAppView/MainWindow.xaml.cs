@@ -10,19 +10,19 @@ namespace NoteAppView
     {
         Auth,
         Register,
-
+        List,
     }
-
-
 
     public partial class MainWindow : Window
     {
         public delegate object MainViewDelegate(MainWindowAction action, object sender, object data);
         public static event MainViewDelegate Event;
+        private MainWindowAction _status;
 
         public MainWindow()
         {
             InitializeComponent();
+            _status = MainWindowAction.Auth;
             var authControl = new AuthControl();
             GridMain.Children.Add(authControl);
             Event += MainWindow_Event;
@@ -43,6 +43,7 @@ namespace NoteAppView
         #region static
         private object MainWindow_Event(MainWindowAction action, object sender, object data)
         {
+            _status = action;
             switch(action)
             {
                 case MainWindowAction.Auth:
@@ -51,16 +52,39 @@ namespace NoteAppView
                 case MainWindowAction.Register:
                     ShowRegister();
                     break;
+                case MainWindowAction.List:
+                    ShowAllMenu(data);
+                    ShowData(data);
+                    break;
                 default:
                     break;
             }
             return null;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        private void ShowData(object data)
+        {
+            GridMain.Dispatcher.Invoke(new Action(() =>
+            {
+                backButton.Visibility = Visibility.Hidden;
+                GridMain.Children.Clear();
+
+            }));
+        }
+
+        private void ShowAllMenu(object data)
+        {
+            
+        }
+
         private void ShowRegister()
         {
             GridMain.Dispatcher.Invoke(new Action(() =>
             {
+                backButton.Visibility = Visibility.Visible;
                 GridMain.Children.Clear();
                 var authControl = new RegisterControl();
                 GridMain.Children.Add(authControl);
@@ -71,6 +95,7 @@ namespace NoteAppView
         {
             GridMain.Dispatcher.Invoke(new Action(() =>
             {
+                backButton.Visibility = Visibility.Hidden;
                 GridMain.Children.Clear();
                 var authControl = new AuthControl();
                 GridMain.Children.Add(authControl);
@@ -108,6 +133,11 @@ namespace NoteAppView
                 default:
                     break;
             }
+        }
+
+        private void OnBackButtonClicked(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

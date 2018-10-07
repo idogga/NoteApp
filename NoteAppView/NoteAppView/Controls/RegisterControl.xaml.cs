@@ -1,17 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace NoteAppView.Controls
 {
@@ -23,6 +13,75 @@ namespace NoteAppView.Controls
         public RegisterControl()
         {
             InitializeComponent();
+            loginTextBox.Focus();
+        }
+
+        private void RegBtnClick(object sender, RoutedEventArgs e)
+        {
+            if (string.IsNullOrEmpty(loginTextBox.Text))
+            {
+                MessageBox.Show("Введите логин", "", MessageBoxButton.OK);
+                loginTextBox.Focus();
+                return;
+            }
+            if (string.IsNullOrEmpty(passTextBox.Password))
+            {
+                MessageBox.Show("Введите пароль", "", MessageBoxButton.OK);
+                passTextBox.Focus();
+                return;
+            }
+            if (string.IsNullOrEmpty(confirmPassTextBox.Password))
+            {
+                MessageBox.Show("Подтвердите пароль", "", MessageBoxButton.OK);
+                confirmPassTextBox.Focus();
+                return;
+            }
+            else
+            {
+                if(confirmPassTextBox.Password != passTextBox.Password)
+                {
+                    MessageBox.Show("Пароли не совпадают", "", MessageBoxButton.OK);
+                    confirmPassTextBox.Password = "";
+                    confirmPassTextBox.Focus();
+                    return;
+                }
+                else
+                {
+                    var user = HttpController.GetInstance().SaveUser(new NoteAppModel.Protocol.UserProtocol()
+                    {
+                        Login = loginTextBox.Text,
+                        Password = passTextBox.Password
+                    });
+                    if(user == null)
+                    {
+                        MessageBox.Show("Не удалось создать пользователя, попробуйте еще раз", "", MessageBoxButton.OK);
+                        loginTextBox.Text = "";
+                        passTextBox.Password = "";
+                        confirmPassTextBox.Password = "";
+                        loginTextBox.Focus();
+                    }
+                    else
+                    {
+                        MessageBox.Show("пользователь успешно создан", "", MessageBoxButton.OK);
+                        MainWindow.InvokeEvent(MainWindowAction.List, this, user);
+                    }
+                }
+            }
+        }
+
+        private void LoginUnFocus(object sender, RoutedEventArgs e)
+        {
+            var login = loginTextBox.Text;
+            Task.Factory.StartNew(() =>
+            {
+                if (HttpController.GetInstance().IsContain(login))
+                    loginTextBox.Dispatcher.Invoke(new Action(() =>
+                    {
+                        MessageBox.Show("Пользователь с таким логином уже существует", "", MessageBoxButton.OK);
+                        loginTextBox.Text = "";
+                        loginTextBox.Focus();
+                    }));
+            });
         }
     }
 }

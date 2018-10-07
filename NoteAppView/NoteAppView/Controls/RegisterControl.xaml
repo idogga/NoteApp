@@ -4,8 +4,36 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:NoteAppView.Controls"
-             mc:Ignorable="d" Background="OldLace">
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             mc:Ignorable="d" 
+             HorizontalAlignment="Center"
+             VerticalAlignment="Top"
+             VerticalContentAlignment="Top">
     <Grid>
+        <Rectangle RadiusY="8" RadiusX="8" Fill="White"/>
+        
+        <StackPanel Margin="20,10">
+            <Label Content="Регистрация" FontFamily="Champagne &amp; Limousines" FontSize="20" Margin="0,10" VerticalAlignment="Top" 
+                   HorizontalAlignment="Center"/>
+            <StackPanel Margin="0,5" Orientation="Horizontal">
+                <materialDesign:PackIcon Kind="Account" VerticalAlignment="Center" Foreground="#707070"/>
+                <TextBox x:Name="loginTextBox" materialDesign:HintAssist.Hint="логин" Width="149" Margin="5"
+                         LostFocus="LoginUnFocus"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <materialDesign:PackIcon Kind="Key" VerticalAlignment="Center" Foreground="#707070"/>
+                <PasswordBox  x:Name="passTextBox" materialDesign:HintAssist.Hint="пароль" Width="151" Margin="5"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <materialDesign:PackIcon Kind="Key" VerticalAlignment="Center" Foreground="#707070"/>
+                <PasswordBox  x:Name="confirmPassTextBox" materialDesign:HintAssist.Hint="пароль" Width="151" Margin="5"/>
+            </StackPanel>
+            <Button HorizontalAlignment="Center" 
+                    Content="Зарегистрироваться" FontFamily="Impact" 
+                    FontSize="18" 
+                    Background="#FF307CD6" BorderBrush="#FF307CD6"
+                    Click="RegBtnClick"/>
             
+        </StackPanel>
     </Grid>
 </UserControl>
