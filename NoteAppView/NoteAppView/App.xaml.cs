@@ -12,6 +12,8 @@ namespace NoteAppView
     {
         protected override void OnExit(ExitEventArgs e)
         {
+            if(ViewDataController.GetInstance().UserData!=null)
+                FileController
             base.OnExit(e);
         }
         protected override void OnStartup(StartupEventArgs e)

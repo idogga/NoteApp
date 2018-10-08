@@ -110,6 +110,7 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\FileController.cs" />
     <Compile Include="Controllers\HttpController.cs" />
     <Compile Include="Controllers\ViewDataController.cs" />
     <Compile Include="Controls\AuthControl.xaml.cs">

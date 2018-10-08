@@ -1,4 +1,5 @@
 ﻿using NoteAppModel.Protocol;
+using NoteAppView.Controllers;
 
 namespace NoteAppView
 {
@@ -9,7 +10,10 @@ namespace NoteAppView
 
         #endregion
 
-        private ViewDataController() { }
+        private ViewDataController()
+        {
+            FileController = new FileController();
+        }
 
         public static ViewDataController GetInstance()
         {
@@ -22,5 +26,10 @@ namespace NoteAppView
         /// Данные о пользователе
         /// </summary>
         public UserProtocol UserData { get; set; }
+
+        /// <summary>
+        /// Управление фалами
+        /// </summary>
+        public FileController FileController { get; set; }
     }
 }
