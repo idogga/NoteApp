@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
@@ -12,25 +13,24 @@ namespace NoteAppView
     {
         protected override void OnExit(ExitEventArgs e)
         {
-            if(ViewDataController.GetInstance().UserData!=null)
-                FileController
+            if (ViewDataController.GetInstance().UserData != null)
+                ViewDataController.GetInstance().FileController.Save<NoteAppModel.Protocol.UserProtocol>("user.tusur", ViewDataController.GetInstance().UserData);
             base.OnExit(e);
         }
         protected override void OnStartup(StartupEventArgs e)
         {
-            // Select the text in a TextBox when it receives focus.
             EventManager.RegisterClassHandler(typeof(TextBox), TextBox.PreviewMouseLeftButtonDownEvent,
                 new MouseButtonEventHandler(SelectivelyIgnoreMouseButton));
             EventManager.RegisterClassHandler(typeof(TextBox), TextBox.GotKeyboardFocusEvent,
                 new RoutedEventHandler(SelectAllText));
             EventManager.RegisterClassHandler(typeof(TextBox), TextBox.MouseDoubleClickEvent,
                 new RoutedEventHandler(SelectAllText));
+            ViewDataController.GetInstance().UserData = ViewDataController.GetInstance().FileController.LoadFromFile<NoteAppModel.Protocol.UserProtocol>("user.tusur");
             base.OnStartup(e);
         }
 
         void SelectivelyIgnoreMouseButton(object sender, MouseButtonEventArgs e)
         {
-            // Find the TextBox
             DependencyObject parent = e.OriginalSource as UIElement;
             while (parent != null && !(parent is TextBox))
                 parent = VisualTreeHelper.GetParent(parent);
@@ -40,8 +40,6 @@ namespace NoteAppView
                 var textBox = (TextBox)parent;
                 if (!textBox.IsKeyboardFocusWithin)
                 {
-                    // If the text box is not yet focused, give it the focus and
-                    // stop further processing of this click event.
                     textBox.Focus();
                     e.Handled = true;
                 }

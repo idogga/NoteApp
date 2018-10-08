@@ -36,5 +36,17 @@ namespace NoteAppView.Controllers
             }
             return null;
         }
+        
+        /// <summary>
+        /// Удаление объекта
+        /// </summary>
+        /// <param name="file">файл</param>
+        public void RemoveFile(string file)
+        {
+            if (File.Exists(_domain + "\\" + file))
+            {
+                File.Delete(_domain + "\\" + file);
+            }
+        }
     }
 }

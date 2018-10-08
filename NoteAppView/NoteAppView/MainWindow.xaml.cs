@@ -23,9 +23,18 @@ namespace NoteAppView
         public MainWindow()
         {
             InitializeComponent();
-            _status = MainWindowAction.Auth;
-            var authControl = new AuthControl();
-            GridMain.Children.Add(authControl);
+            if (ViewDataController.GetInstance().UserData == null)
+            {
+                _status = MainWindowAction.Auth;
+                var authControl = new AuthControl();
+                GridMain.Children.Add(authControl);
+            }
+            else
+            {
+                _status = MainWindowAction.List;
+                ShowAllMenu(null);
+                ShowData(null);
+            }
             Event += MainWindow_Event;
         }
 
