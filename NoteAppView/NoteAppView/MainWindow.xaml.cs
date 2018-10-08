@@ -72,7 +72,7 @@ namespace NoteAppView
             {
                 backButton.Visibility = Visibility.Hidden;
                 GridMain.Children.Clear();
-
+                GridMain.Children.Add(new HomeControl());
             }));
         }
 
@@ -82,6 +82,8 @@ namespace NoteAppView
             {
                 FadeTo(itemList);
                 FadeTo(newNoteItem);
+                itemList.IsEnabled = true;
+                newNoteItem.IsEnabled = true;
                 userNameText.Text = ViewDataController.GetInstance().UserData.Login;
             }));
         }
@@ -134,8 +136,7 @@ namespace NoteAppView
             {
                 case "ItemHome":
                     Logger.GetInstance().Write("Выбрано : перейти домой");
-                    //usc = new UserControlHome();
-                    //GridMain.Children.Add(usc);
+                    GridMain.Children.Add(new HomeControl());
                     break;
                 case "ItemCreate":
                     Logger.GetInstance().Write("Выбрано : создать запись");
