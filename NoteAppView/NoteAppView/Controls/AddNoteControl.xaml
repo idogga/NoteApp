@@ -1,0 +1,31 @@
+﻿<UserControl x:Class="NoteAppView.Controls.AddNoteControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:NoteAppView.Controls"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             mc:Ignorable="d" >
+    <Grid>
+        <Rectangle RadiusY="8" RadiusX="8" Fill="White"/>
+        <StackPanel>
+        <StackPanel Margin="0,5" Orientation="Horizontal">
+            <materialDesign:PackIcon Kind="Account" VerticalAlignment="Center"
+                                     Foreground="#707070"/>
+            <TextBox x:Name="titleTextBox" materialDesign:HintAssist.Hint="Название" 
+                     FontSize="16"
+                     Width="300" Margin="5"/>
+        </StackPanel>
+            <TextBox x:Name="contentTextBox" FontSize="16"
+                     
+                     materialDesign:HintAssist.Hint="Текст" 
+                     Width="316" Height="200" Margin="10"
+                     VerticalContentAlignment="Top"/>
+        </StackPanel>
+            <Button Content="Применить" HorizontalAlignment="Left" 
+                    VerticalAlignment="Bottom"
+                    Click="AcceptClicked"/>
+        <Button Content="Очистить" HorizontalAlignment="Right" VerticalAlignment="Bottom"
+                Click="ClearClicked"/>
+    </Grid>
+</UserControl>

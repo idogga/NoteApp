@@ -22,7 +22,10 @@
         </Rectangle>
         <StackPanel Margin="20,10,225,50"
                     MaxWidth="200">
-            <Label Content="Авторизация" FontFamily="Champagne &amp; Limousines" FontSize="20" Margin="0,10" VerticalAlignment="Top" 
+            <Label Content="Авторизация" 
+                   FontFamily="Champagne &amp; Limousines" 
+                   FontSize="20" 
+                   Margin="0,10" VerticalAlignment="Top" 
                    HorizontalAlignment="Center"/>
             <StackPanel Margin="0,5" Orientation="Horizontal">
                 <materialDesign:PackIcon Kind="Account" VerticalAlignment="Center" Foreground="#707070"/>
@@ -34,7 +37,7 @@
             </StackPanel>
             <Button HorizontalAlignment="Center" 
                     Content="Авторизоваться" FontFamily="Impact" 
-                    FontSize="18" 
+                    FontSize="15" 
                     Background="#FF307CD6" BorderBrush="#FF307CD6"
                     Click="AuthBtnClick"/>
             <Button 
@@ -50,12 +53,13 @@
                        VerticalAlignment="Top"
                        Foreground="White" 
                        HorizontalAlignment="Center" 
-                       FontSize="40" 
+                       FontSize="20" 
                        FontFamily="Champagne &amp; Limousines" 
-                       FontWeight="Bold"/>
+                       FontWeight="Bold"
+                       Margin="72,20"/>
             <TextBlock Text="Лучшее приложение для создания и хранения моих заметок. Великолепно!" Foreground="White" 
                        HorizontalAlignment="Center" 
-                       Width="200" FontSize="20" 
+                       Width="200" FontSize="15" 
                        FontFamily="Champagne &amp; Limousines" 
                        TextWrapping="Wrap" TextAlignment="Center" 
                        Margin="0,40,0,0"/>

@@ -147,10 +147,10 @@ namespace NoteAppView
                     Logger.GetInstance().Write("Выбрано : перейти домой");
                     GridMain.Children.Add(new HomeControl());
                     break;
-                case "ItemCreate":
+                case "newNoteItem":
                     Logger.GetInstance().Write("Выбрано : создать запись");
-                    //usc = new UserControlCreate();
-                    //GridMain.Children.Add(usc);
+                    var addNote = new AddNoteControl();
+                    GridMain.Children.Add(addNote);
                     break;
                 case "ExitApp":
                     Logger.GetInstance().Write("Выбрано : создать запись");
