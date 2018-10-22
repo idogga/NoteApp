@@ -6,51 +6,52 @@
              xmlns:local="clr-namespace:NoteAppView.Controls"
              HorizontalContentAlignment="Center"
              HorizontalAlignment="Stretch"
-             >
-    <StackPanel CanVerticallyScroll="True" MinWidth="600">
-        <ListView x:Name="notesListView" ItemsSource="{Binding _noteItems}"
+             VerticalAlignment="Stretch"
+             MinWidth="600">
+    <ScrollViewer VerticalScrollBarVisibility="Auto" MinWidth="600">
+        <StackPanel CanVerticallyScroll="True" MinWidth="600">
+            <ListView x:Name="notesListView" ItemsSource="{Binding _noteItems}"
                   SelectionChanged="notesListView_SelectionChanged"
             SelectionMode="Single"
             IsSynchronizedWithCurrentItem="True"
             HorizontalAlignment="Stretch"
             VerticalAlignment="Stretch"
-                        Foreground="#FF5C99D6"
-                  
-                  >
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <Grid MinWidth="600"
+                        Foreground="#FF5C99D6">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid MinWidth="600"
                           MaxWidth="600">
-                        <Rectangle RadiusY="8" RadiusX="8" Fill="White"/>
-                        <StackPanel Margin="10">
-                            <Label Content="{Binding Title}" 
+                            <Rectangle RadiusY="8" RadiusX="8" Fill="White"/>
+                            <StackPanel Margin="10">
+                                <Label Content="{Binding Title}" 
                                        FontFamily="Champagne &amp; Limousines" FontSize="16"
                                        Margin="0,10" VerticalAlignment="Top" 
                                        HorizontalAlignment="Center"/>
-                            <TextBlock Text="{Binding DateCreature}" 
+                                <TextBlock Text="{Binding DateCreature}" 
                                        FontFamily="Champagne &amp; Limousines" FontSize="8"
                                        Margin="0,10" VerticalAlignment="Top" 
                                        TextWrapping="Wrap"
                                        HorizontalAlignment="Right"/>
-                            <TextBlock Text="{Binding Description}" 
+                                <TextBlock Text="{Binding Description}" 
                                        FontFamily="Champagne &amp; Limousines" FontSize="16"
                                        Margin="0,10" TextWrapping="WrapWithOverflow"
                                        HorizontalAlignment="Stretch"/>
-                            <TextBlock Text="{Binding Tags}" 
+                                <TextBlock Text="{Binding Tags}" 
                                        FontFamily="Champagne &amp; Limousines"  FontSize="8"
                                        Margin="0,10" TextWrapping="WrapWithOverflow"
                                        HorizontalAlignment="Left"/>
-                        </StackPanel>
-                    </Grid>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
-        <Grid x:Name="notNote" Visibility="Hidden" Margin="20">
-            <Rectangle RadiusY="8" RadiusX="8" Fill="White"/>
-            <TextBlock Text="Записей нет" 
+                            </StackPanel>
+                        </Grid>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            <Grid x:Name="notNote" Visibility="Hidden" Margin="20">
+                <Rectangle RadiusY="8" RadiusX="8" Fill="White"/>
+                <TextBlock Text="Записей нет" 
                        FontFamily="Champagne &amp; Limousines" FontSize="16"
                        Margin="0,10" VerticalAlignment="Center" 
-                       HorizontalAlignment="Center"/>            
-        </Grid>
-    </StackPanel>
+                       HorizontalAlignment="Center"/>
+            </Grid>
+        </StackPanel>
+    </ScrollViewer>
 </UserControl>

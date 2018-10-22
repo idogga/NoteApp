@@ -38,6 +38,7 @@ namespace NoteAppView
             Event += MainWindow_Event;
         }
 
+        
         private void ButtonOpenMenu_Click(object sender, RoutedEventArgs e)
         {
             ButtonCloseMenu.Visibility = Visibility.Visible;
@@ -163,6 +164,11 @@ namespace NoteAppView
         private void OnBackButtonClicked(object sender, RoutedEventArgs e)
         {
 
+        }
+
+        private void Window_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            GridMain.Height = e.NewSize.Height - 140;
         }
     }
 }

@@ -7,9 +7,9 @@
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" >
     <Grid MinWidth="600"
-          MaxWidth="600" MinHeight="400">
+          MaxWidth="600" MinHeight="400" MaxHeight="400">
         <Rectangle RadiusY="8" RadiusX="8" Fill="White" VerticalAlignment="Top"
-                   MinWidth="600" Height="300"/>
+                   MinWidth="600" Height="350"/>
         <StackPanel>
             <TextBox x:Name="titleTextBox" materialDesign:HintAssist.Hint="Название" 
                      FontSize="16"
@@ -21,7 +21,7 @@
                      Width="500" Height="200" Margin="10"
                      VerticalContentAlignment="Top"/>
         </StackPanel>
-        <Grid MinWidth="500"
+        <Grid MinWidth="500" Margin="0,200,0,0"
                     HorizontalAlignment="Center">
             <Button Content="Применить" HorizontalAlignment="Left"
                     Click="AcceptClicked"/>

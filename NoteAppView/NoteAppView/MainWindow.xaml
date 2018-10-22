@@ -11,7 +11,8 @@
         WindowStyle="SingleBorderWindow"
         FontFamily="pack://application:,,,/MaterialDesignThemes.Wpf;component/Resources/Roboto/#Roboto"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
-        Background="{DynamicResource MaterialDesignPaper}">
+        Background="{DynamicResource MaterialDesignPaper}"
+        SizeChanged="Window_SizeChanged">
     <Window.Resources>
         <Storyboard x:Key="OpenMenu">
             <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Width)" Storyboard.TargetName="GridMenu">
