@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:NoteAppView.Controls"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" >
-    <Grid>
+    <Grid MinWidth="600">
         <Rectangle RadiusY="8" RadiusX="8" Fill="White"/>
         <StackPanel>
         <StackPanel Margin="0,5" Orientation="Horizontal">

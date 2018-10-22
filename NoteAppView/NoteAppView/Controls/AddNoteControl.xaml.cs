@@ -25,6 +25,8 @@ namespace NoteAppView.Controls
             var newNote = new NoteAppModel.NoteProtocol();
             newNote.Title = titleTextBox.Text;
             newNote.ContentText = contentTextBox.Text;
+            newNote.TagsLinks = new System.Collections.Generic.List<int>() { 1, 2 };
+            newNote.UserId = ViewDataController.GetInstance().UserData.UserKey;
             if (HttpController.GetInstance().SaveNote(newNote))
             {
                 MainWindow.InvokeEvent(MainWindowAction.List, this, newNote);

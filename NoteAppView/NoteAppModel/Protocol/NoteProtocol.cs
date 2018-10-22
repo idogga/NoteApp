@@ -74,6 +74,7 @@ namespace NoteAppModel
             CreateDate = realm.CreateDate;
             UpdateDate = realm.UpdateDate;
             Flags = realm.Flags;
+            Title = realm.Title;
         }
     }
 }

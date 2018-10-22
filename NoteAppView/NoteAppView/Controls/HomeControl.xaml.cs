@@ -50,6 +50,7 @@ namespace NoteAppView.Controls
                             {
                                 _noteItems.Add(new NoteItem(note));
                             }
+                            notesListView.ItemsSource = _noteItems;
                         }
                     }));
             });

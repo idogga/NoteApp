@@ -70,6 +70,7 @@ namespace NoteAppModel.DataBase
             CreateDate = protocol.CreateDate;
             UpdateDate = protocol.UpdateDate;
             Flags = protocol.Flags;
+            Title = protocol.Title;
         }
     }
 }
