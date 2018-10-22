@@ -138,12 +138,11 @@ namespace NoteAppView
 
         private void ListViewMenu_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            //UserControl usc = null;
             GridMain.Children.Clear();
-
             switch (((ListViewItem)((ListView)sender).SelectedItem).Name)
             {
-                case "ItemHome":
+                case "itemList":
+                    backButton.Visibility = Visibility.Hidden;
                     Logger.GetInstance().Write("Выбрано : перейти домой");
                     GridMain.Children.Add(new HomeControl());
                     break;

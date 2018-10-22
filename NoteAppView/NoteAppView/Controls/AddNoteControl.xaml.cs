@@ -20,8 +20,31 @@ namespace NoteAppView.Controls
             contentTextBox.Text = oldNote.ContentText;
         }
 
+        /// <summary>
+        /// проверка заметки на корректный ввод
+        /// </summary>
+        /// <returns></returns>
+        private bool CheckNote()
+        {
+            if(string.IsNullOrWhiteSpace(titleTextBox.Text))
+            {
+                MessageBox.Show("Введите название", "", MessageBoxButton.OK);
+                titleTextBox.Focus();
+                return false;
+            }
+            if (string.IsNullOrWhiteSpace(contentTextBox.Text))
+            {
+                MessageBox.Show("Введите саму заметку", "", MessageBoxButton.OK);
+                contentTextBox.Focus();
+                return false;
+            }
+            return true;
+        }
+
         private void AcceptClicked(object sender, RoutedEventArgs e)
         {
+            if (!CheckNote()) return;
+            
             var newNote = new NoteAppModel.NoteProtocol();
             newNote.Title = titleTextBox.Text;
             newNote.ContentText = contentTextBox.Text;

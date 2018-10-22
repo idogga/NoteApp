@@ -50,6 +50,10 @@
                        VerticalAlignment="Center" FontSize="16"
                        HorizontalAlignment="Right"/>
         </Grid>
+
+        <Grid x:Name="GridMain" Margin="70,70,0,0"
+              VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
+              Height="540" Width="730"/>
         
         <Grid x:Name="GridMenu" Width="70" HorizontalAlignment="Left" Background="#FF31577E">
             <Grid.Effect>
@@ -105,8 +109,5 @@
             </StackPanel>
         </Grid>
 
-        <Grid x:Name="GridMain" Margin="70,70,0,0"
-              VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
-              Height="540" Width="730"/>
     </Grid>
 </Window>
