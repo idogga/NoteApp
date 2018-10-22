@@ -12,6 +12,8 @@ namespace NoteAppView
         Auth,
         Register,
         List,
+        Settings,
+        New
     }
 
     public partial class MainWindow : Window
@@ -140,17 +142,25 @@ namespace NoteAppView
         private void ListViewMenu_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             GridMain.Children.Clear();
+            backButton.Visibility = Visibility.Hidden;
             switch (((ListViewItem)((ListView)sender).SelectedItem).Name)
             {
                 case "itemList":
-                    backButton.Visibility = Visibility.Hidden;
                     Logger.GetInstance().Write("Выбрано : перейти домой");
+                    _status = MainWindowAction.List;
                     GridMain.Children.Add(new HomeControl());
                     break;
                 case "newNoteItem":
                     Logger.GetInstance().Write("Выбрано : создать запись");
+                    _status = MainWindowAction.New;
                     var addNote = new AddNoteControl();
                     GridMain.Children.Add(addNote);
+                    break;
+                case "settingsItem":
+                    Logger.GetInstance().Write("Выбрано : настройки");
+                    _status = MainWindowAction.Settings;
+                    var settingscontrol = new SettingsControl();
+                    GridMain.Children.Add(settingscontrol);
                     break;
                 case "ExitApp":
                     Logger.GetInstance().Write("Выбрано : создать запись");
