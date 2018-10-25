@@ -7,7 +7,6 @@ namespace NoteAppView
     {
         #region private
         private static ViewDataController _instance;
-
         #endregion
 
         private ViewDataController()

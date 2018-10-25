@@ -62,6 +62,7 @@ namespace NoteAppView.Controls
                     }
                     else
                     {
+                        ViewDataController.GetInstance().UserData = user;
                         MessageBox.Show("пользователь успешно создан", "", MessageBoxButton.OK);
                         MainWindow.InvokeEvent(MainWindowAction.List, this, user);
                     }

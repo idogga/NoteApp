@@ -10,7 +10,7 @@ namespace NoteAppView
         public static void Remove(this UserProtocol user)
         {
             ViewDataController.GetInstance().FileController.RemoveFile("user.tusur");
-            user = null;
+            ViewDataController.GetInstance().UserData = null;
         }
     }
 }

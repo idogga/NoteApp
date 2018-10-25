@@ -7,7 +7,6 @@ using System.IO;
 using System.Net;
 using System.Net.Http;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace NoteAppView
 {
@@ -15,6 +14,7 @@ namespace NoteAppView
     {
         private readonly HttpClient client = new HttpClient();
         private static HttpController _instance;
+        public string Address = "localhost";
 
         private HttpController()
         {
@@ -111,7 +111,7 @@ namespace NoteAppView
         private string MakeRequest(string name, string body)
         {
             var bodyByte = Encoding.UTF8.GetBytes(name + ":" + Convert.ToBase64String(Encoding.UTF8.GetBytes(body)) + "$end");
-            var request = WebRequest.Create("http://localhost:1333");
+            var request = WebRequest.Create("http://" + Address + ":1333");
             request.Method = "POST";
             request.Credentials = CredentialCache.DefaultCredentials;
             request.ContentType = "text/json";
