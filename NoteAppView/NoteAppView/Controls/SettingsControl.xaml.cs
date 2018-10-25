@@ -1,17 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+﻿using System.Windows.Controls;
 
 namespace NoteAppView.Controls
 {
@@ -23,6 +10,17 @@ namespace NoteAppView.Controls
         public SettingsControl()
         {
             InitializeComponent();
+        }
+
+        private void ReAuthClicked(object sender, System.Windows.RoutedEventArgs e)
+        {
+            MainWindow.InvokeEvent(MainWindowAction.Auth, this, null);
+        }
+
+        private void RegisterClicked(object sender, System.Windows.RoutedEventArgs e)
+        {
+            ViewDataController.GetInstance().UserData.Remove();
+            MainWindow.InvokeEvent(MainWindowAction.Register, this, null);
         }
     }
 }

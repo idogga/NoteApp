@@ -120,6 +120,7 @@
   <ItemGroup>
     <Compile Include="Controllers\FileController.cs" />
     <Compile Include="Controllers\HttpController.cs" />
+    <Compile Include="Controllers\UserExtension.cs" />
     <Compile Include="Controllers\ViewDataController.cs" />
     <Compile Include="Controls\AddNoteControl.xaml.cs">
       <DependentUpon>AddNoteControl.xaml</DependentUpon>
