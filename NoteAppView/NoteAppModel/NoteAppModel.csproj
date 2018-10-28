@@ -74,6 +74,7 @@
     <Compile Include="DataBase\UserRealm.cs" />
     <Compile Include="Logger.cs" />
     <Compile Include="Protocol\AnswerProtocolEnum.cs" />
+    <Compile Include="Protocol\ImageLoaderProtocol.cs" />
     <Compile Include="Protocol\NoteProtocol.cs" />
     <Compile Include="NoteTypes.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -30,5 +30,10 @@ namespace NoteAppView
         /// Управление фалами
         /// </summary>
         public FileController FileController { get; set; }
+
+        /// <summary>
+        /// Управление картинками
+        /// </summary>
+        public ImageController ImageController { get; set; }
     }
 }

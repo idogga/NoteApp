@@ -1,12 +1,16 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media.Imaging;
 
 namespace NoteAppView.Controls
 {
     public partial class AddNoteControl : UserControl
     {
+        List<byte[]> _images=new List<byte[]>();
+
         public AddNoteControl(NoteAppModel.NoteProtocol oldNote = null)
         {
             InitializeComponent();
@@ -100,6 +104,21 @@ namespace NoteAppView.Controls
                 {
                     checkBox.IsChecked = false;
                 }
+            }
+            _images.Clear();
+        }
+
+        private void AddPictureClick(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog op = new OpenFileDialog();
+            op.Title = "Select a picture";
+            op.Filter = "All supported graphics|*.jpg;*.jpeg;*.png|" +
+              "JPEG (*.jpg;*.jpeg)|*.jpg;*.jpeg|" +
+              "Portable Network Graphic (*.png)|*.png";
+            if (op.ShowDialog() == true)
+            {
+                var image = new BitmapImage(new Uri(op.FileName));
+                _images.Add(ViewDataController.GetInstance().ImageController.ImageToByteArray(new System.Drawing.Bitmap(image.StreamSource)));
             }
         }
     }

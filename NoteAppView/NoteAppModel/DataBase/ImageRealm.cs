@@ -1,4 +1,5 @@
-﻿using Realms;
+﻿using NoteAppModel.Protocol;
+using Realms;
 
 namespace NoteAppModel.DataBase
 {
@@ -14,5 +15,14 @@ namespace NoteAppModel.DataBase
         /// Картинка
         /// </summary>
         public byte[] ImageSource { get; set; }
+
+        public ImageRealm()
+        { }
+
+        public ImageRealm(ImageLoaderProtocol protocol)
+        {
+            ImageKey = protocol.ImageKey;
+            ImageSource = protocol.ImageSource;
+        }
     }
 }
