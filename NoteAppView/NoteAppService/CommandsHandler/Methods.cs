@@ -2,6 +2,7 @@
 using NoteAppModel;
 using NoteAppModel.DataBase;
 using NoteAppModel.Protocol;
+using System;
 using System.Collections.Generic;
 
 namespace NoteAppService
@@ -21,7 +22,9 @@ namespace NoteAppService
             _commands.Add("GETUSER", GetUser);
             _commands.Add("GETALLNOTES", GetAllNotes);
             _commands.Add("SAVENOTE", SaveNote);
+            _commands.Add("SAVEIMAGE", SaveImage);
         }
+
 
         /// <summary>
         /// Словарь со всеми командами
@@ -144,6 +147,21 @@ namespace NoteAppService
             catch
             {
                 result = false;
+            }
+            return Serialize(result);
+        }
+
+
+        private string SaveImage(string inRequest)
+        {
+            var result = 0;
+            try
+            {
+                result = _dbHelper.SaveImage(new ImageRealm(JsonConvert.DeserializeObject<ImageLoaderProtocol>(inRequest)));
+            }
+            catch
+            {
+                result = 0;
             }
             return Serialize(result);
         }

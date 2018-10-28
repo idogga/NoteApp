@@ -1,4 +1,5 @@
 ﻿using Microsoft.Win32;
+using NoteAppModel.Protocol;
 using System;
 using System.Collections.Generic;
 using System.Windows;
@@ -65,6 +66,7 @@ namespace NoteAppView.Controls
         {
             if (!CheckNote())
                 return;
+            SaveImages();
             var newNote = new NoteAppModel.NoteProtocol();
             newNote.Title = titleTextBox.Text;
             newNote.ContentText = contentTextBox.Text;
@@ -77,6 +79,20 @@ namespace NoteAppView.Controls
             else
             {
                 MessageBox.Show("Не удалось сохранить запись", "", MessageBoxButton.OK);
+            }
+        }
+
+        private void SaveImages()
+        {
+            foreach (var image in _images)
+            {
+                var imageProtocol = new ImageLoaderProtocol();
+                imageProtocol.ImageSource = image;
+                if (HttpController.GetInstance().SaveImage(imageProtocol) == 0)
+                {
+                    MessageBox.Show("Не удалось сохранить картинку", "", MessageBoxButton.OK);
+                    break;
+                }
             }
         }
 

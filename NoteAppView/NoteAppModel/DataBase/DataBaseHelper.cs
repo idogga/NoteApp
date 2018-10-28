@@ -3,6 +3,8 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Security.Cryptography;
+using System.Text;
 
 namespace NoteAppModel.DataBase
 {
@@ -129,6 +131,43 @@ namespace NoteAppModel.DataBase
                 _realm.Write(() => _realm.Add(user, update: true));
                 return user;
             }
+        }
+
+        /// <summary>
+        /// Сохранение картинки
+        /// </summary>
+        /// <param name="imageRealm"></param>
+        public int SaveImage(ImageRealm imageRealm)
+        {
+            lock(_obj)
+            {
+                var list = _realm.All<ImageRealm>().ToList();
+                var imageMD = GetHashFromByteArray(imageRealm.ImageSource);
+                var currentNumber = 0;
+                foreach(var image in list)
+                {
+                    if (imageMD.Equals(GetHashFromByteArray(image.ImageSource)))
+                    {
+                        return currentNumber;
+                    }
+                }
+                imageRealm.ImageKey = list.Max(x => x.ImageKey) + 1;
+                _realm.Write(() => _realm.Add(imageRealm, update: true));
+                return imageRealm.ImageKey;
+            }
+        }
+        
+
+       private string GetHashFromByteArray(byte[] array)
+        {
+            using (MD5 md5 = MD5.Create())
+            {
+                byte[] byteHashed = md5.ComputeHash(array);
+            }
+            StringBuilder result = new StringBuilder(array.Length * 2);
+            for (int i = 0; i < array.Length; i++)
+                result.Append(array[i].ToString("x2"));
+            return result.ToString();
         }
     }
 }

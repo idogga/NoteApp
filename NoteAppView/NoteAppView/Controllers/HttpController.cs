@@ -107,6 +107,20 @@ namespace NoteAppView
             }
             return result;
         }
+
+        internal int SaveImage(ImageLoaderProtocol image)
+        {
+            int result = 0;
+            try
+            {
+                var str = MakeRequest("SAVEIMAGE", JsonConvert.SerializeObject(image));
+            }
+            catch
+            {
+                result = 0;
+            }
+            return result;
+        }
         #region Приватные методы
         private string MakeRequest(string name, string body)
         {
