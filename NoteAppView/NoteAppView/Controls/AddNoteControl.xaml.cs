@@ -1,4 +1,6 @@
-﻿using System.Windows;
+﻿using System;
+using System.Collections.Generic;
+using System.Windows;
 using System.Windows.Controls;
 
 namespace NoteAppView.Controls
@@ -38,17 +40,31 @@ namespace NoteAppView.Controls
                 contentTextBox.Focus();
                 return false;
             }
+            var isCheckBoxSelect = false;
+            foreach (var element in checkBoxGrid.Children)
+            {
+                if (element is CheckBox checkBox)
+                {
+                    bool ischeck = checkBox.IsChecked ?? false;
+                    isCheckBoxSelect |= ischeck; 
+                }
+            }
+            if (!isCheckBoxSelect)
+            {
+                MessageBox.Show("Выберите хотя бы одну тему", "", MessageBoxButton.OK);
+                return false;
+            }
             return true;
         }
 
         private void AcceptClicked(object sender, RoutedEventArgs e)
         {
-            if (!CheckNote()) return;
-            
+            if (!CheckNote())
+                return;
             var newNote = new NoteAppModel.NoteProtocol();
             newNote.Title = titleTextBox.Text;
             newNote.ContentText = contentTextBox.Text;
-            newNote.TagsLinks = new System.Collections.Generic.List<int>() { 1, 2 };
+            newNote.TagsLinks = GetTagLinks();
             newNote.UserId = ViewDataController.GetInstance().UserData.UserKey;
             if (HttpController.GetInstance().SaveNote(newNote))
             {
@@ -60,10 +76,31 @@ namespace NoteAppView.Controls
             }
         }
 
+        private List<int> GetTagLinks()
+        {
+            var result = new List<int>();
+            foreach (var element in checkBoxGrid.Children)
+            {
+                if (element is CheckBox check)
+                {
+                    if (check.IsChecked ?? false)
+                        result.Add(int.Parse(check.Uid));
+                }
+            }
+            return result;
+        }
+
         private void ClearClicked(object sender, RoutedEventArgs e)
         {
             titleTextBox.Text = "";
             contentTextBox.Text = "";
+            foreach(var element in checkBoxGrid.Children)
+            {
+                if(element is CheckBox checkBox)
+                {
+                    checkBox.IsChecked = false;
+                }
+            }
         }
     }
 }
