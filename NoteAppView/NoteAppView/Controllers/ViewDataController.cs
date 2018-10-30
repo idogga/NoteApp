@@ -12,6 +12,7 @@ namespace NoteAppView
         private ViewDataController()
         {
             FileController = new FileController();
+            ImageController = new ImageController();
         }
 
         public static ViewDataController GetInstance()

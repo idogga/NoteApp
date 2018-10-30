@@ -7,9 +7,9 @@
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" >
     <Grid MinWidth="600"
-          MaxWidth="600" MinHeight="400" MaxHeight="400">
+          MaxWidth="600" MinHeight="430" MaxHeight="470">
         <Rectangle RadiusY="8" RadiusX="8" Fill="White" VerticalAlignment="Top"
-                   MinWidth="600" Height="380"/>
+                   MinWidth="600" Height="430"/>
         <StackPanel>
             <TextBox x:Name="titleTextBox" materialDesign:HintAssist.Hint="Название" 
                      FontSize="16"
@@ -39,9 +39,9 @@
                 <CheckBox Grid.Column="1" Grid.Row="1" Content="Ужин"
                           Uid="2"/>
             </Grid>
-            <Button Content="Добавить картинку" Click="AddPictureClick"/>
+            <Button Content="Добавить картинку" Margin="20,10" Click="AddPictureClick"/>
         </StackPanel>
-        <Grid MinWidth="500" Margin="0,290,0,0"
+        <Grid MinWidth="500" Margin="0,380,0,0"
                     HorizontalAlignment="Center">
             <Button Content="Применить" HorizontalAlignment="Left"
                     Click="AcceptClicked"/>

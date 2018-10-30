@@ -157,6 +157,15 @@ namespace NoteAppModel.DataBase
             }
         }
         
+        public ImageRealm GetImage(int imageKey)
+        {
+            lock(_obj)
+            {
+                var list = _realm.All<ImageRealm>().ToList();
+                var image = list.FirstOrDefault(x => x.ImageKey == imageKey);
+                return image;
+            }
+        }
 
        private string GetHashFromByteArray(byte[] array)
         {

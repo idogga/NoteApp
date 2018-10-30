@@ -66,11 +66,11 @@ namespace NoteAppView.Controls
         {
             if (!CheckNote())
                 return;
-            SaveImages();
             var newNote = new NoteAppModel.NoteProtocol();
             newNote.Title = titleTextBox.Text;
             newNote.ContentText = contentTextBox.Text;
             newNote.TagsLinks = GetTagLinks();
+            newNote.ImageLinks = SaveImages();
             newNote.UserId = ViewDataController.GetInstance().UserData.UserKey;
             if (HttpController.GetInstance().SaveNote(newNote))
             {
@@ -82,18 +82,16 @@ namespace NoteAppView.Controls
             }
         }
 
-        private void SaveImages()
+        private List<int> SaveImages()
         {
+            var result = new List<int>();
             foreach (var image in _images)
             {
                 var imageProtocol = new ImageLoaderProtocol();
                 imageProtocol.ImageSource = image;
-                if (HttpController.GetInstance().SaveImage(imageProtocol) == 0)
-                {
-                    MessageBox.Show("Не удалось сохранить картинку", "", MessageBoxButton.OK);
-                    break;
-                }
+                result.Add(HttpController.GetInstance().SaveImage(imageProtocol));
             }
+            return result;
         }
 
         private List<int> GetTagLinks()
@@ -134,7 +132,7 @@ namespace NoteAppView.Controls
             if (op.ShowDialog() == true)
             {
                 var image = new BitmapImage(new Uri(op.FileName));
-                _images.Add(ViewDataController.GetInstance().ImageController.ImageToByteArray(new System.Drawing.Bitmap(image.StreamSource)));
+                _images.Add(ViewDataController.GetInstance().ImageController.ImageToByteArray(image));
             }
         }
     }

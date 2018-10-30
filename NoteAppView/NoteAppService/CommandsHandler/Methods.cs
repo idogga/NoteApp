@@ -23,9 +23,10 @@ namespace NoteAppService
             _commands.Add("GETALLNOTES", GetAllNotes);
             _commands.Add("SAVENOTE", SaveNote);
             _commands.Add("SAVEIMAGE", SaveImage);
+            _commands.Add("LOADIMAGE", LoadImage);
+
         }
-
-
+        
         /// <summary>
         /// Словарь со всеми командами
         /// </summary>
@@ -162,6 +163,20 @@ namespace NoteAppService
             catch
             {
                 result = 0;
+            }
+            return Serialize(result);
+        }
+
+        private string LoadImage(string inRequest)
+        {
+            ImageLoaderProtocol result = null;
+            try
+            {
+                result = new ImageLoaderProtocol(_dbHelper.GetImage(JsonConvert.DeserializeObject<int>(inRequest)));
+            }
+            catch
+            {
+                result = null;
             }
             return Serialize(result);
         }
