@@ -63,7 +63,7 @@ namespace NoteAppView
                     ShowAuth();
                     return new object();
                 case MainWindowAction.Register:
-                    ShowRegister();
+                    ShowRegister(sender);
                     break;
                 case MainWindowAction.List:
                     ShowAllMenu(data);
@@ -110,11 +110,18 @@ namespace NoteAppView
             control.BeginAnimation(OpacityProperty, da);
         }
 
-        private void ShowRegister()
+        private void ShowRegister(object sender)
         {
             GridMain.Dispatcher.Invoke(new Action(() =>
             {
-                backButton.Visibility = Visibility.Visible;
+                if (sender is SettingsControl)
+                {
+                    backButton.Visibility = Visibility.Hidden;
+                }
+                else
+                {
+                    backButton.Visibility = Visibility.Visible;
+                }
                 GridMain.Children.Clear();
                 var authControl = new RegisterControl();
                 GridMain.Children.Add(authControl);

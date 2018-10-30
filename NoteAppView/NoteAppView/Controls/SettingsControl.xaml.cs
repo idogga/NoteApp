@@ -16,6 +16,7 @@ namespace NoteAppView.Controls
 
         private void ReAuthClicked(object sender, System.Windows.RoutedEventArgs e)
         {
+            ViewDataController.GetInstance().UserData.Remove();
             MainWindow.InvokeEvent(MainWindowAction.Auth, this, null);
         }
 
