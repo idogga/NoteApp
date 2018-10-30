@@ -8,10 +8,17 @@ using System.Windows.Media.Imaging;
 
 namespace NoteAppView.Controls
 {
+    /// <summary>
+    /// Контрол для создания новой записи
+    /// </summary>
     public partial class AddNoteControl : UserControl
     {
-        List<byte[]> _images=new List<byte[]>();
+        private List<byte[]> _images = new List<byte[]>();
 
+        /// <summary>
+        /// Конструктор
+        /// </summary>
+        /// <param name="oldNote">старая запись</param>
         public AddNoteControl(NoteAppModel.NoteProtocol oldNote = null)
         {
             InitializeComponent();

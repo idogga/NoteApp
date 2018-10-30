@@ -2,11 +2,13 @@
 using NoteAppModel;
 using NoteAppModel.DataBase;
 using NoteAppModel.Protocol;
-using System;
 using System.Collections.Generic;
 
 namespace NoteAppService
 {
+    /// <summary>
+    /// Методы для выполнения
+    /// </summary>
     public class Methods
     {
         private Dictionary<string, CommandDelegate> _commands;
@@ -152,7 +154,11 @@ namespace NoteAppService
             return Serialize(result);
         }
 
-
+        /// <summary>
+        /// Сохранение картинки
+        /// </summary>
+        /// <param name="inRequest"></param>
+        /// <returns></returns>
         private string SaveImage(string inRequest)
         {
             var result = 0;
@@ -167,6 +173,11 @@ namespace NoteAppService
             return Serialize(result);
         }
 
+        /// <summary>
+        /// Загрузка картинки
+        /// </summary>
+        /// <param name="inRequest"></param>
+        /// <returns></returns>
         private string LoadImage(string inRequest)
         {
             ImageLoaderProtocol result = null;

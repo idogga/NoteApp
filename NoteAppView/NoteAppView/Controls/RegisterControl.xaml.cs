@@ -6,7 +6,7 @@ using System.Windows.Controls;
 namespace NoteAppView.Controls
 {
     /// <summary>
-    /// Interaction logic for RegisterControl.xaml
+    /// Контрол для регистрации
     /// </summary>
     public partial class RegisterControl : UserControl
     {

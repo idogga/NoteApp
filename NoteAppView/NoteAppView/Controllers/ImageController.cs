@@ -5,8 +5,16 @@ using System.Windows.Media.Imaging;
 
 namespace NoteAppView.Controllers
 {
+    /// <summary>
+    /// Контроллер управления картинками
+    /// </summary>
     public class ImageController
     {
+        /// <summary>
+        /// Преобразование картинки в массив байтов
+        /// </summary>
+        /// <param name="bitmapImage">Картинка</param>
+        /// <returns>Массив байтов картинки</returns>
         public byte[] ImageToByteArray(BitmapImage bitmapImage)
         {
             var bitmap = BitmapImage2Bitmap(bitmapImage);

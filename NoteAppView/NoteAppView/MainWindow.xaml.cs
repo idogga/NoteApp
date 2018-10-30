@@ -7,15 +7,9 @@ using System.Windows.Media.Animation;
 
 namespace NoteAppView
 {
-    public enum MainWindowAction
-    {
-        Auth,
-        Register,
-        List,
-        Settings,
-        New
-    }
-
+    /// <summary>
+    /// Основной класс окна
+    /// </summary>
     public partial class MainWindow : Window
     {
         public delegate object MainViewDelegate(MainWindowAction action, object sender, object data);
@@ -139,6 +133,13 @@ namespace NoteAppView
             }));
         }
 
+        /// <summary>
+        /// Вызов события
+        /// </summary>
+        /// <param name="action">Действие</param>
+        /// <param name="sender">Отправитель</param>
+        /// <param name="data">Данные для передачи</param>
+        /// <returns></returns>
         public static object InvokeEvent(MainWindowAction action, object sender, object data)
         {
             return Event?.Invoke(action, sender, data);
@@ -182,7 +183,7 @@ namespace NoteAppView
         {
 
         }
-
+        
         private void Window_SizeChanged(object sender, SizeChangedEventArgs e)
         {
             GridMain.Height = e.NewSize.Height - 140;

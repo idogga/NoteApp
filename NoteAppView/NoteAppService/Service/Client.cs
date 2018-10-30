@@ -7,8 +7,15 @@ using System.Text.RegularExpressions;
 
 namespace NoteAppService
 {
+    /// <summary>
+    /// Клиент службы
+    /// </summary>
     public class Client
     {
+        /// <summary>
+        /// Конструктор
+        /// </summary>
+        /// <param name="client">клиент службы</param>
         public Client(TcpClient client)
         {
             Logger.GetInstance().Write("Запрос получен");

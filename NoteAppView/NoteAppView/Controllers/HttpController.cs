@@ -10,10 +10,16 @@ using System.Text;
 
 namespace NoteAppView
 {
+    /// <summary>
+    /// Контроллер http-запросов
+    /// </summary>
     public class HttpController
     {
         private readonly HttpClient client = new HttpClient();
         private static HttpController _instance;
+        /// <summary>
+        /// Адрес для переходов
+        /// </summary>
         public string Address = "localhost";
 
         private HttpController()
@@ -64,6 +70,11 @@ namespace NoteAppView
             }
         }
 
+        /// <summary>
+        /// Сохранение заявки
+        /// </summary>
+        /// <param name="newNote">Заявка для сохранения</param>
+        /// <returns>Успех сохранения</returns>
         internal bool SaveNote(NoteProtocol newNote)
         {
             try
@@ -78,6 +89,12 @@ namespace NoteAppView
             }
         }
 
+        /// <summary>
+        /// Получить пользователя
+        /// </summary>
+        /// <param name="login">Логин</param>
+        /// <param name="pass">Пароль</param>
+        /// <returns>Пользователь</returns>
         internal UserProtocol GetUser(string login, string pass)
         {
             var user = new UserProtocol() { Login = login, Password = pass };
@@ -93,6 +110,11 @@ namespace NoteAppView
             return user;
         }
 
+        /// <summary>
+        /// Получить все заметки
+        /// </summary>
+        /// <param name="userKey">идентификатор пользователя</param>
+        /// <returns>список заметок</returns>
         internal List<NoteProtocol> GetAllNotes(int userKey)
         {
             List<NoteProtocol> result = new List<NoteProtocol>();
@@ -108,6 +130,11 @@ namespace NoteAppView
             return result;
         }
 
+        /// <summary>
+        /// Сохранение картинки
+        /// </summary>
+        /// <param name="image">Картинка</param>
+        /// <returns>Идентификатор картинки</returns>
         internal int SaveImage(ImageLoaderProtocol image)
         {
             int result = 0;

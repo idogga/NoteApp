@@ -3,6 +3,9 @@ using System.IO;
 
 namespace NoteAppView.Controllers
 {
+    /// <summary>
+    /// Контроллер управления файлами
+    /// </summary>
     public class FileController
     {
         private string _domain;

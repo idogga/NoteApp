@@ -5,7 +5,7 @@ using System.Windows.Controls;
 namespace NoteAppView.Controls
 {
     /// <summary>
-    /// Interaction logic for SettingsControl.xaml
+    /// Окно настройки
     /// </summary>
     public partial class SettingsControl : UserControl
     {
