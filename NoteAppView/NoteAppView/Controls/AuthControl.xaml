@@ -10,18 +10,8 @@
              VerticalAlignment="Top"
              VerticalContentAlignment="Top">
     <Grid>
-        <Rectangle RadiusY="8" RadiusX="8" Fill="White"/>
-        <Rectangle Margin="200,0,0,0">
-            <Rectangle.Fill>
-                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                    <GradientStop Color="#CC935E12" Offset="1"/>
-                    <GradientStop Color="#CCEA4646"/>
-                    <GradientStop Color="#CCB89128" Offset="0.566"/>
-                </LinearGradientBrush>
-            </Rectangle.Fill>
-        </Rectangle>
-        <StackPanel Margin="20,10,225,50"
-                    MaxWidth="200">
+        <Rectangle RadiusY="8" RadiusX="8" Fill="White" Margin="0,0,0,41"/>
+        <StackPanel Margin="20,10,20,50">
             <Label Content="Авторизация" 
                    FontFamily="Champagne &amp; Limousines" 
                    FontSize="20" 
@@ -36,39 +26,24 @@
                 <materialDesign:PackIcon Kind="Key" VerticalAlignment="Center" Foreground="#707070"/>
                 <PasswordBox  x:Name="passTextBox" materialDesign:HintAssist.Hint="пароль" Width="151" Margin="5"/>
             </StackPanel>
-            <Button HorizontalAlignment="Center" 
+            <Button 
                     Content="Авторизоваться" FontFamily="Impact" 
                     FontSize="15" 
                     Background="#FF307CD6" BorderBrush="#FF307CD6"
-                    Click="AuthBtnClick"/>
+                    Click="AuthBtnClick"
+                Margin="10,5"
+                    HorizontalAlignment="Stretch"/>
             <Button 
                     Content="Зарегестрироваться"
-                    FontSize="10"
+                    FontSize="15"
+                 FontFamily="Impact"
+                HorizontalAlignment="Stretch"
                     Background="#FF307CD6"
                     BorderBrush="#FF307CD6"
-                    Margin="30,10,27,10" 
-                    Click="RegisterBtnClick" Height="20" Width="128"/>
-        </StackPanel>
-        <StackPanel Margin="200,0,0,0">
-            <TextBlock Text="NoteApp" 
-                       VerticalAlignment="Top"
-                       Foreground="White" 
-                       HorizontalAlignment="Center" 
-                       FontSize="20" 
-                       FontFamily="Champagne &amp; Limousines" 
-                       FontWeight="Bold"
-                       Margin="72,20"/>
-            <TextBlock Text="Лучшее приложение для создания и хранения моих заметок. Великолепно!" Foreground="White" 
-                       HorizontalAlignment="Center" 
-                       Width="200" FontSize="15" 
-                       FontFamily="Champagne &amp; Limousines" 
-                       TextWrapping="Wrap" TextAlignment="Center" 
-                       Margin="0,40,0,0"/>
-            <TextBlock Text="А.Е.Горяинов" Foreground="White" 
-                       FontSize="15" 
-                       FontFamily="Champagne &amp; Limousines" 
-                       TextWrapping="Wrap" TextAlignment="Right" 
-                       Margin="10"/>
+
+                Margin="10,5"
+                
+                Click="RegisterBtnClick"/>
         </StackPanel>
     </Grid>
 </UserControl>

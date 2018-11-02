@@ -30,6 +30,10 @@ namespace NoteAppView
         /// <summary>
         /// Новая заявка
         /// </summary>
-        New
+        New, 
+        /// <summary>
+        /// Изменение записи
+        /// </summary>
+        ChangeNote
     }
 }

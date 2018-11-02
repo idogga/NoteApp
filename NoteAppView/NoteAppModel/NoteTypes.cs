@@ -4,7 +4,7 @@ namespace NoteAppModel
 {
     public class NoteTypes
     {
-        private enum _typeEnum
+        public enum NoteTypeEnum
         {
             Work,
             Family, 
@@ -17,10 +17,10 @@ namespace NoteAppModel
         public NoteTypes()
         {
             _typeContainer = new Dictionary<int, string>();
-            _typeContainer.Add((int)_typeEnum.Dinner, "Ужин");
-            _typeContainer.Add((int)_typeEnum.Family, "Семья");
-            _typeContainer.Add((int)_typeEnum.Weekend, "Отдых");
-            _typeContainer.Add((int)_typeEnum.Work, "Работа");
+            _typeContainer.Add((int)NoteTypeEnum.Dinner, "Ужин");
+            _typeContainer.Add((int)NoteTypeEnum.Family, "Семья");
+            _typeContainer.Add((int)NoteTypeEnum.Weekend, "Отдых");
+            _typeContainer.Add((int)NoteTypeEnum.Work, "Работа");
         }
 
         public string GetTypesString(IList<int> types)
@@ -39,7 +39,7 @@ namespace NoteAppModel
 
         private string GetTypeString(int type)
         {
-            if(type >= (int)_typeEnum.MAX)
+            if(type >= (int)NoteTypeEnum.MAX)
                 return "неопределенный тип";
             try
             {

@@ -63,6 +63,13 @@ namespace NoteAppView
                     ShowAllMenu(data);
                     ShowData(data);
                     break;
+                case MainWindowAction.ChangeNote:
+                    GridMain.Children.Clear();
+                    Logger.GetInstance().Write("Выбрано : изменить запись");
+                    _status = MainWindowAction.ChangeNote;
+                    var addNote = new AddNoteControl(((NoteItem)data).Note);
+                    GridMain.Children.Add(addNote);
+                    break;
                 default:
                     break;
             }

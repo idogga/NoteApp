@@ -18,9 +18,9 @@
             </StackPanel>
             <Button x:Name="acceptButton" Content="Подтвердить" HorizontalAlignment="Stretch" IsEnabled="False"
                     Click="AcceptClicked" Margin="10,10,10,30"/>
-            <Button Content="Разлогиниться" HorizontalAlignment="Stretch"
+            <Button Content="Выйти из профиля" HorizontalAlignment="Stretch"
                     Click="ReAuthClicked" Margin="10"/>
-            <Button Content="Перерегестрироваться" HorizontalAlignment="Stretch"
+            <Button Content="Сменить пользователя" HorizontalAlignment="Stretch"
                     Click="RegisterClicked" Margin="10"/>
         </StackPanel>
     </Grid>

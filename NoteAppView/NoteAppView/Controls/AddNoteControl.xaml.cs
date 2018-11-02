@@ -14,6 +14,7 @@ namespace NoteAppView.Controls
     public partial class AddNoteControl : UserControl
     {
         private List<byte[]> _images = new List<byte[]>();
+        private NoteAppModel.NoteProtocol newNote;
 
         /// <summary>
         /// Конструктор
@@ -25,6 +26,11 @@ namespace NoteAppView.Controls
             if(oldNote!=null)
             {
                 FillOldValue(oldNote);
+                newNote = oldNote;
+            }
+            else
+            {
+                newNote = new NoteAppModel.NoteProtocol();
             }
         }
 
@@ -32,6 +38,27 @@ namespace NoteAppView.Controls
         {
             titleTextBox.Text = oldNote.Title;
             contentTextBox.Text = oldNote.ContentText;
+            FillCheckBoxes(oldNote.TagsLinks);
+        }
+
+        private void FillCheckBoxes(List<int> tagsLinks)
+        {
+            foreach(var tag in tagsLinks)
+            {
+                CheckTag(tag);                
+            }
+        }
+
+        private void CheckTag(int tag)
+        {
+            foreach (var element in checkBoxGrid.Children)
+            {
+                if (element is CheckBox checkBox)
+                {
+                    if(int.Parse(checkBox.Uid) == tag)
+                    checkBox.IsChecked = true;
+                }
+            }
         }
 
         /// <summary>
@@ -73,11 +100,10 @@ namespace NoteAppView.Controls
         {
             if (!CheckNote())
                 return;
-            var newNote = new NoteAppModel.NoteProtocol();
             newNote.Title = titleTextBox.Text;
             newNote.ContentText = contentTextBox.Text;
             newNote.TagsLinks = GetTagLinks();
-            newNote.ImageLinks = SaveImages();
+            //newNote.ImageLinks = SaveImages();
             newNote.UserId = ViewDataController.GetInstance().UserData.UserKey;
             if (HttpController.GetInstance().SaveNote(newNote))
             {

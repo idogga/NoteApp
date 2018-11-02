@@ -41,7 +41,7 @@
             </Grid>
             <Button Content="Добавить картинку" Margin="20,10" Click="AddPictureClick"/>
         </StackPanel>
-        <Grid MinWidth="500" Margin="0,380,0,0"
+        <Grid MinWidth="500" Margin="0,340,0,0"
                     HorizontalAlignment="Center">
             <Button Content="Применить" HorizontalAlignment="Left"
                     Click="AcceptClicked"/>

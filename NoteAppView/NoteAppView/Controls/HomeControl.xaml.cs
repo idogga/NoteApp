@@ -13,6 +13,7 @@ namespace NoteAppView.Controls
     /// </summary>
     public partial class HomeControl : UserControl
     {
+        private bool _isFirstSelection = true;
         #region private
         private List<NoteAppModel.NoteProtocol> _notes;
         private ObservableCollection<NoteItem> _noteItems = new ObservableCollection<NoteItem>();
@@ -43,6 +44,7 @@ namespace NoteAppView.Controls
                                 _noteItems.Add(new NoteItem(note));
                             }
                             notesListView.ItemsSource = _noteItems;
+                            notesListView.SelectedItem = null;
                         }
                     }));
             });
@@ -55,7 +57,18 @@ namespace NoteAppView.Controls
 
         private void notesListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-
+            if (e.AddedItems == null)
+                return;
+            if (e.AddedItems.Count == 0)
+                return;
+            if (_isFirstSelection)
+            {
+                _isFirstSelection = false;
+            }
+            else
+            {
+                MainWindow.InvokeEvent(MainWindowAction.ChangeNote, this, e.AddedItems[0]);
+            }
         }
     }
 }
