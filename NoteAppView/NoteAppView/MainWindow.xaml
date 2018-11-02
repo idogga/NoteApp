@@ -47,9 +47,11 @@
                     Click="OnBackButtonClicked"
                     HorizontalAlignment="Left"
                     Margin="70,0"/>
-            <TextBlock x:Name="userNameText" Margin="10"
+            <TextBlock x:Name="userNameText"
+                       Margin="10"
                        VerticalAlignment="Center" FontSize="16"
-                       HorizontalAlignment="Right"/>
+                       HorizontalAlignment="Right"
+                       Foreground="White"/>
         </Grid>
 
         <Grid x:Name="GridMain" Margin="70,70,0,0"
@@ -83,15 +85,15 @@
                     <ListViewItem x:Name="itemList" Height="60"
                                   Opacity="0" IsEnabled="False">
                         <StackPanel Orientation="Horizontal">
-                            <materialDesign:PackIcon Kind="ViewDashboard" Height="25" Width="25" Margin="10"/>
-                            <TextBlock Text="Home" VerticalAlignment="Center" Margin="20 10"/>
+                            <materialDesign:PackIcon Kind="Asterisk" Height="25" Width="25" Margin="10"/>
+                            <TextBlock Text="Записи" VerticalAlignment="Center" Margin="20 10"/>
                         </StackPanel>
                     </ListViewItem>
                     <ListViewItem x:Name="newNoteItem" Height="60"                                  
                                   Opacity="0" IsEnabled="False">
                         <StackPanel Orientation="Horizontal">
-                            <materialDesign:PackIcon Kind="Ticket" Height="25" Width="25" Margin="10"/>
-                            <TextBlock Text="Галлерея" VerticalAlignment="Center"  Margin="20 10"/>
+                            <materialDesign:PackIcon Kind="NewBox" Height="25" Width="25" Margin="10"/>
+                            <TextBlock Text="Новая запись" VerticalAlignment="Center"  Margin="20 10"/>
                         </StackPanel>
                     </ListViewItem>
                     <ListViewItem x:Name="settingsItem" Height="60">
