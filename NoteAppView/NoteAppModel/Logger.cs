@@ -5,7 +5,7 @@ namespace NoteAppModel
 {
     public class Logger
     {
-        object _obj = new object();
+        private static readonly object _obj = new object();
         private static Logger _instance;
 
         public static Logger GetInstance()
@@ -38,7 +38,8 @@ namespace NoteAppModel
         /// <param name="obj">Объект для логгирования</param>
         public void Write(object obj)
         {
-            if (obj != null)
+            lock (_obj)
+                if (obj != null)
             {
                 var log = GetLogString(Newtonsoft.Json.JsonConvert.SerializeObject(obj));
                 System.Diagnostics.Debug.WriteLine(log);

@@ -1,6 +1,9 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using NoteAppModel;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.IO;
+using System.Threading.Tasks;
+using System.Collections.Generic;
 
 namespace NoteAppModel.Tests
 {
@@ -35,6 +38,22 @@ namespace NoteAppModel.Tests
             foreach (var str in strings)
                 Assert.IsFalse(string.IsNullOrEmpty(str), "лог должен быть");
             File.Delete(AppDomain.CurrentDomain.BaseDirectory + "Errors-" + DateTime.Now.ToString("yyyy-MM-dd") + ".log");
+        }
+
+        [TestMethod()]
+        public void WriteTestMultiThread()
+        {
+            var tasks = new List<Task>();
+            for(int i = 0; i<20;i++)
+            {
+                tasks.Add(Task.Factory.StartNew(() =>
+                Logger.GetInstance().Write("test")));
+            }
+            Task.WaitAll(tasks.ToArray());
+            var strings = File.ReadAllLines(AppDomain.CurrentDomain.BaseDirectory + "Log-" + DateTime.Now.ToString("yyyy-MM-dd") + ".log");
+            foreach (var str in strings)
+                Assert.IsFalse(string.IsNullOrEmpty(str), "лог должен быть");
+            File.Delete(AppDomain.CurrentDomain.BaseDirectory + "Log-" + DateTime.Now.ToString("yyyy-MM-dd") + ".log");
         }
     }
 }
