@@ -23,10 +23,14 @@ namespace NoteAppModel.Tests
                 var str = type.GetTypesString(new List<int>() { -1, int.MaxValue });
                 Assert.IsFalse(string.IsNullOrEmpty(str), "Строка пустая");
             }
-            {
-                var str = type.GetTypesString(new List<int>());
-                Assert.IsFalse(string.IsNullOrEmpty(str), "Строка пустая");
-            }
+        }
+
+        [TestMethod()]
+        public void GetTypesStringTestNull()
+        {
+            var type = new NoteTypes();
+            var str = type.GetTypesString(new List<int>());
+            Assert.IsFalse(string.IsNullOrEmpty(str), "Строка пустая");
         }
     }
 }

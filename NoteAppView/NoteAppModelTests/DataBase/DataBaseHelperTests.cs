@@ -31,6 +31,20 @@ namespace NoteAppModel.DataBase.Tests
         }
 
         [TestMethod()]
+        public void SaveNoteTestNull()
+        {
+            var dbHelper = new DataBaseHelper(true);
+            try
+            {
+                dbHelper.SaveNote(null);
+            }
+            catch
+            {
+                Assert.Fail("asd");
+            }
+        }
+
+        [TestMethod()]
         public void GetUserTest()
         {
             var dbHelper = new DataBaseHelper(true);
@@ -52,10 +66,24 @@ namespace NoteAppModel.DataBase.Tests
         }
 
         [TestMethod()]
+        public void SaveUserTestNull()
+        {
+            var dbHelper = new DataBaseHelper(true);
+            Assert.IsNotNull(dbHelper.SaveUser(null));
+        }
+
+        [TestMethod()]
         public void SaveImageTest()
         {
             var dbHelper = new DataBaseHelper(true);
             Assert.IsTrue(0!=dbHelper.SaveImage(new ImageRealm() { ImageKey = 1, ImageSource = new byte[1024] }));
+        }
+
+        [TestMethod()]
+        public void SaveImageTestNull()
+        {
+            var dbHelper = new DataBaseHelper(true);
+            Assert.IsTrue(0 != dbHelper.SaveImage(null));
         }
 
         [TestMethod()]
