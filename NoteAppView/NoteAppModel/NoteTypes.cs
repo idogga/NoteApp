@@ -23,6 +23,11 @@ namespace NoteAppModel
             _typeContainer.Add((int)NoteTypeEnum.Work, "Работа");
         }
 
+        /// <summary>
+        /// Получение строки типов записей
+        /// </summary>
+        /// <param name="types"></param>
+        /// <returns></returns>
         public string GetTypesString(IList<int> types)
         {
             var result = "";
