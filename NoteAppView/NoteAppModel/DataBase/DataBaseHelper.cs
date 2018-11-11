@@ -10,10 +10,10 @@ namespace NoteAppModel.DataBase
 {
     public class DataBaseHelper
     {
-        private object _obj = new object();
+        private static readonly object _obj = new object();
         private Realm _realm;
 
-        public DataBaseHelper()
+        public DataBaseHelper(bool isTest = false)
         {
             string path = $"{Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData)}\\RealmDesktop";
             bool isDatabaseInitialized = Directory.Exists(path);
@@ -22,7 +22,11 @@ namespace NoteAppModel.DataBase
                 Directory.CreateDirectory(path);
             }
 
-            string file = $"{path}\\noteBase.realm";
+            string file = "";
+            if (isTest)
+                file = $"{path}\\noteBaseTest.realm";
+            else
+                file = $"{path}\\noteBase.realm";
 
             RealmConfiguration config = new RealmConfiguration(file)
             {
