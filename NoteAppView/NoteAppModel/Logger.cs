@@ -54,7 +54,7 @@ namespace NoteAppModel
         {
             lock (_obj)
             {
-                var log = GetLogString("Ошибка : " + ex.Message+Environment.NewLine+ex.StackTrace);
+                var log = GetLogString("Ошибка : " + ex.Message);
                 System.Diagnostics.Debug.WriteLine(log);
                 File.AppendAllText(AppDomain.CurrentDomain.BaseDirectory + "Errors-" + DateTime.Now.ToString("yyyy-MM-dd") + ".log", log + Environment.NewLine);
             }
