@@ -1,5 +1,4 @@
-﻿using NoteAppModel;
-using System.Linq;
+﻿using System.Linq;
 
 namespace NoteAppService
 {

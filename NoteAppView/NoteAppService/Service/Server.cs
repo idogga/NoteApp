@@ -3,7 +3,6 @@ using System;
 using System.Net;
 using System.Net.Sockets;
 using System.Threading;
-using System.Threading.Tasks;
 
 namespace NoteAppService
 {
@@ -23,10 +22,6 @@ namespace NoteAppService
             while (true)
             {
                 ThreadPool.QueueUserWorkItem(new WaitCallback(ClientThread), _listener.AcceptTcpClient());
-                //Task.Factory.StartNew(() =>
-                //{
-                //    new Client(_listener.AcceptTcpClient(), logger);
-                //});
             }
         }
 

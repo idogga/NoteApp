@@ -16,7 +16,11 @@ namespace NoteAppService
 
         public Methods()
         {
-            _dbHelper = new DataBaseHelper();
+            try
+            {
+                _dbHelper = new DataBaseHelper();
+            }
+            catch { }
             _commands =new Dictionary<string, CommandDelegate>();
             _commands.Add("AUTH", Authorize);
             _commands.Add("USERCONTAINS", UserContains);
