@@ -5,14 +5,17 @@ namespace NoteAppService.Tests
     [TestClass()]
     public class MethodsTests
     {
+        /// <summary>
+        /// проверка на получение словаря с доступными коммандами
+        /// </summary>
         [TestMethod()]
         public void GetAvailableCommandsTest()
         {
-            var methods = new Methods();
-            foreach(var meth in methods.GetAvailableCommands())
+            var actualmethods = new Methods();
+            foreach(var actual in actualmethods.GetAvailableCommands())
             {
-                Assert.IsNotNull(meth.Key, "Название должно быть");
-                Assert.IsNotNull(meth.Value, "Метод должен быть");
+                Assert.IsNotNull(actual.Key, "Название должно быть");
+                Assert.IsNotNull(actual.Value, "Метод должен быть");
             }
         }
     }

@@ -1,45 +1,67 @@
-﻿using NoteAppModel;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
-using System.Collections.Generic;
 
 namespace NoteAppModel.Tests
 {
     [TestClass()]
     public class LoggerTests
     {
+        /// <summary>
+        /// запись строки в файл логов
+        /// </summary>
+        /// <remarks>
+        /// позитивный тест (test)
+        /// </remarks>
         [TestMethod()]
-        public void WriteTest()
+        public void WriteTestString()
         {
             Logger.GetInstance().Write("test");
-            var strings = File.ReadAllLines(AppDomain.CurrentDomain.BaseDirectory + "Log-" + DateTime.Now.ToString("yyyy-MM-dd") + ".log");
-            foreach (var str in strings)
-                Assert.IsFalse(string.IsNullOrEmpty(str), "лог должен быть");
-            File.Delete(AppDomain.CurrentDomain.BaseDirectory + "Log-" + DateTime.Now.ToString("yyyy-MM-dd") + ".log");
+            var actualStrings = File.ReadAllLines(AppDomain.CurrentDomain.BaseDirectory + "Log-" + DateTime.Now.ToString("yyyy-MM-dd") + ".log");
+            foreach (var actual
+                in actualStrings)
+                Assert.IsFalse(string.IsNullOrEmpty(actual), "лог должен быть");
         }
 
+        /// <summary>
+        /// запись объекта в файл логов
+        /// </summary>
+        /// <remarks>
+        /// позитивный тест (test)
+        /// </remarks>
         [TestMethod()]
-        public void WriteTest1()
+        public void WriteTestObject()
         {
+            // рандомный объект 
             Logger.GetInstance().Write(new { field1 = 0, field2 = "asdfghj" });
-            var strings = File.ReadAllLines(AppDomain.CurrentDomain.BaseDirectory + "Log-" + DateTime.Now.ToString("yyyy-MM-dd") + ".log");
-            foreach (var str in strings)
-                Assert.IsFalse(string.IsNullOrEmpty(str), "лог должен быть");
-            File.Delete(AppDomain.CurrentDomain.BaseDirectory + "Log-" + DateTime.Now.ToString("yyyy-MM-dd") + ".log");
+            var actualStrings = File.ReadAllLines(AppDomain.CurrentDomain.BaseDirectory + "Log-" + DateTime.Now.ToString("yyyy-MM-dd") + ".log");
+            foreach (var actual in actualStrings)
+                Assert.IsFalse(string.IsNullOrEmpty(actual), "лог должен быть");
         }
 
+        /// <summary>
+        /// запись ошибки в файл логов
+        /// </summary>
+        /// <remarks>
+        /// позитивный тест (какая сгенерированая ошибка)
+        /// </remarks>
         [TestMethod()]
-        public void WriteTest2()
+        public void WriteTestException()
         {
             Logger.GetInstance().Write(new Exception("Тестовая ошибка"));
-            var strings = File.ReadAllLines(AppDomain.CurrentDomain.BaseDirectory + "Errors-" + DateTime.Now.ToString("yyyy-MM-dd") + ".log");
-            foreach (var str in strings)
-                Assert.IsFalse(string.IsNullOrEmpty(str), "лог должен быть");
-            File.Delete(AppDomain.CurrentDomain.BaseDirectory + "Errors-" + DateTime.Now.ToString("yyyy-MM-dd") + ".log");
+            var actualStrings = File.ReadAllLines(AppDomain.CurrentDomain.BaseDirectory + "Errors-" + DateTime.Now.ToString("yyyy-MM-dd") + ".log");
+            foreach (var actual in actualStrings)
+                Assert.IsFalse(string.IsNullOrEmpty(actual), "лог должен быть");
         }
 
+        /// <summary>
+        /// запись строк в файл логов в режиме мультипоточности
+        /// </summary>
+        /// <remarks>
+        /// позитивный тест (какая сгенерированая ошибка)
+        /// </remarks>
         [TestMethod()]
         public void WriteTestMultiThread()
         {
@@ -50,9 +72,14 @@ namespace NoteAppModel.Tests
                 Logger.GetInstance().Write("test")));
             }
             Task.WaitAll(tasks.ToArray());
-            var strings = File.ReadAllLines(AppDomain.CurrentDomain.BaseDirectory + "Log-" + DateTime.Now.ToString("yyyy-MM-dd") + ".log");
-            foreach (var str in strings)
-                Assert.IsFalse(string.IsNullOrEmpty(str), "лог должен быть");
+            var actualStrings = File.ReadAllLines(AppDomain.CurrentDomain.BaseDirectory + "Log-" + DateTime.Now.ToString("yyyy-MM-dd") + ".log");
+            foreach (var actual in actualStrings)
+                Assert.IsFalse(string.IsNullOrEmpty(actual), "лог должен быть");
+        }
+
+        [TestCleanup()]
+        public void Clean()
+        {
             File.Delete(AppDomain.CurrentDomain.BaseDirectory + "Log-" + DateTime.Now.ToString("yyyy-MM-dd") + ".log");
         }
     }

@@ -35,6 +35,9 @@ namespace NoteAppModel
         /// <summary>
         /// Запись в консоль
         /// </summary>
+        /// <remarks>
+        /// если объект циклический (к примеру Exception, упадет с ошибкой)
+        /// </remarks>
         /// <param name="obj">Объект для логгирования</param>
         public void Write(object obj)
         {
