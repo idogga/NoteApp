@@ -55,6 +55,9 @@
   <PropertyGroup>
     <ApplicationIcon>Properties\icon.ico</ApplicationIcon>
   </PropertyGroup>
+  <PropertyGroup>
+    <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="MaterialDesignColors, Version=1.1.3.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\MaterialDesignColors.1.1.3\lib\net45\MaterialDesignColors.dll</HintPath>
@@ -192,4 +195,14 @@
     <None Include="Properties\icon.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>rd /s /q $(SolutionDir)InnoSetup\Release
+rd /s /q $(SolutionDir)InnoSetup\Output
+md $(SolutionDir)InnoSetup\Release
+md $(SolutionDir)InnoSetup\Output
+xcopy $(TargetDir)*.dll $(SolutionDir)InnoSetup\Release\ 
+xcopy $(TargetDir)*.exe $(SolutionDir)InnoSetup\Release\ 
+"C:\Program Files (x86)\Inno Setup 5\ISCC.exe" $(SolutionDir)InnoSetup\NoteApp.iss
+rd /s /q $(SolutionDir)InnoSetup\Release</PostBuildEvent>
+  </PropertyGroup>
 </Project>

@@ -11,7 +11,7 @@ namespace NoteAppService
     /// </summary>
     public class Methods
     {
-        private Dictionary<string, CommandDelegate> _commands;
+        private readonly Dictionary<string, CommandDelegate> _commands;
         private DataBaseHelper _dbHelper;
 
         public Methods()
@@ -21,15 +21,17 @@ namespace NoteAppService
                 _dbHelper = new DataBaseHelper();
             }
             catch { }
-            _commands =new Dictionary<string, CommandDelegate>();
-            _commands.Add("AUTH", Authorize);
-            _commands.Add("USERCONTAINS", UserContains);
-            _commands.Add("SAVEUSER", SaveUser);
-            _commands.Add("GETUSER", GetUser);
-            _commands.Add("GETALLNOTES", GetAllNotes);
-            _commands.Add("SAVENOTE", SaveNote);
-            _commands.Add("SAVEIMAGE", SaveImage);
-            _commands.Add("LOADIMAGE", LoadImage);
+            _commands = new Dictionary<string, CommandDelegate>
+            {
+                { "AUTH", Authorize },
+                { "USERCONTAINS", UserContains },
+                { "SAVEUSER", SaveUser },
+                { "GETUSER", GetUser },
+                { "GETALLNOTES", GetAllNotes },
+                { "SAVENOTE", SaveNote },
+                { "SAVEIMAGE", SaveImage },
+                { "LOADIMAGE", LoadImage }
+            };
 
         }
         

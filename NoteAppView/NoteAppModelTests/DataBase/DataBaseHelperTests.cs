@@ -5,6 +5,14 @@ namespace NoteAppModel.DataBase.Tests
     [TestClass()]
     public class DataBaseHelperTests
     {
+        private DataBaseHelper dbHelper;
+
+        public void SetUp()
+        {
+            dbHelper = new DataBaseHelper(true);
+        }
+
+
         /// <summary>
         /// Тестирование получения всех данных от пользователя
         /// </summary>
@@ -14,11 +22,8 @@ namespace NoteAppModel.DataBase.Tests
         [TestMethod()]
         public void GetAllNotesTest()
         {
-            var dbHelper = new DataBaseHelper(true);
-            {
-                var answer = dbHelper.GetAllNotes(-1);
-                Assert.IsNull(answer, "Нашлись данные");
-            }
+            var answer = dbHelper.GetAllNotes(-1);
+            Assert.IsNull(answer, "Нашлись данные");
         }
 
         /// <summary>
@@ -30,7 +35,6 @@ namespace NoteAppModel.DataBase.Tests
         [TestMethod()]
         public void SaveNoteTest()
         {
-            var dbHelper = new DataBaseHelper(true);
             try
             {
                 dbHelper.SaveNote(new NoteRealm());
@@ -50,7 +54,6 @@ namespace NoteAppModel.DataBase.Tests
         [TestMethod()]
         public void SaveNoteTestNull()
         {
-            var dbHelper = new DataBaseHelper(true);
             try
             {
                 dbHelper.SaveNote(null);
@@ -70,7 +73,6 @@ namespace NoteAppModel.DataBase.Tests
         [TestMethod()]
         public void GetUserTest()
         {
-            var dbHelper = new DataBaseHelper(true);
             //  в качестве полей выбраны случайные строки
             Assert.IsNull(dbHelper.GetUser("werty", "dfghj"));
         }
@@ -84,7 +86,6 @@ namespace NoteAppModel.DataBase.Tests
         [TestMethod()]
         public void UserContainsTest()
         {
-            var dbHelper = new DataBaseHelper(true);
             //  в качестве полей выбраны случайная строка
             Assert.IsFalse(dbHelper.UserContains("asdfghjkl"));
         }
@@ -98,7 +99,6 @@ namespace NoteAppModel.DataBase.Tests
         [TestMethod()]
         public void SaveUserTest()
         {
-            var dbHelper = new DataBaseHelper(true);
             Assert.IsNotNull(dbHelper.SaveUser(new UserRealm()));
         }
 
@@ -124,7 +124,6 @@ namespace NoteAppModel.DataBase.Tests
         [TestMethod()]
         public void SaveImageTest()
         {
-            var dbHelper = new DataBaseHelper(true);
             Assert.IsTrue(0!=dbHelper.SaveImage(new ImageRealm() { ImageKey = 1, ImageSource = new byte[1024] }));
         }
 
@@ -137,7 +136,6 @@ namespace NoteAppModel.DataBase.Tests
         [TestMethod()]
         public void SaveImageTestNull()
         {
-            var dbHelper = new DataBaseHelper(true);
             Assert.IsTrue(0 != dbHelper.SaveImage(null));
         }
 
@@ -150,7 +148,6 @@ namespace NoteAppModel.DataBase.Tests
         [TestMethod()]
         public void GetImageTest()
         {
-            var dbHelper = new DataBaseHelper(true);
             Assert.IsNull(dbHelper.GetImage(-1));
         }
     }
